@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F4A9962BDB14A1064A697CD /* Pods_FocusMode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 518D2E96209EC4F617D76D1A /* Pods_FocusMode.framework */; };
 		550D313A23DE3ED800927EA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D313923DE3ED800927EA9 /* AppDelegate.swift */; };
 		550D313C23DE3ED800927EA9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D313B23DE3ED800927EA9 /* SceneDelegate.swift */; };
 		550D314123DE3ED800927EA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550D313F23DE3ED800927EA9 /* Main.storyboard */; };
@@ -14,9 +15,13 @@
 		550D314623DE3ED900927EA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 550D314523DE3ED900927EA9 /* Assets.xcassets */; };
 		550D314923DE3ED900927EA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550D314723DE3ED900927EA9 /* LaunchScreen.storyboard */; };
 		5592388323DE425B00DDC774 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5592388223DE425B00DDC774 /* WelcomeViewController.swift */; };
+		55A196A223DFA8650034A256 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A196A123DFA8650034A256 /* User.swift */; };
+		55A196A423DFA8760034A256 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A196A323DFA8760034A256 /* Task.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		45D43B2AAB6BF5DA4053AC8B /* Pods-FocusMode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusMode.release.xcconfig"; path = "Target Support Files/Pods-FocusMode/Pods-FocusMode.release.xcconfig"; sourceTree = "<group>"; };
+		518D2E96209EC4F617D76D1A /* Pods_FocusMode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusMode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		550D313623DE3ED800927EA9 /* FocusMode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusMode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		550D313923DE3ED800927EA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		550D313B23DE3ED800927EA9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +31,9 @@
 		550D314823DE3ED900927EA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		550D314A23DE3ED900927EA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5592388223DE425B00DDC774 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		55A196A123DFA8650034A256 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		55A196A323DFA8760034A256 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		D5BDD30C26C91F6F51C128A5 /* Pods-FocusMode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusMode.debug.xcconfig"; path = "Target Support Files/Pods-FocusMode/Pods-FocusMode.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +41,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F4A9962BDB14A1064A697CD /* Pods_FocusMode.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		415595C73CEB38FADC4FC1A6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D5BDD30C26C91F6F51C128A5 /* Pods-FocusMode.debug.xcconfig */,
+				45D43B2AAB6BF5DA4053AC8B /* Pods-FocusMode.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		550D312D23DE3ED800927EA9 = {
 			isa = PBXGroup;
 			children = (
 				550D313823DE3ED800927EA9 /* FocusMode */,
 				550D313723DE3ED800927EA9 /* Products */,
+				415595C73CEB38FADC4FC1A6 /* Pods */,
+				64BCB15C5C3CF525A08E48B3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,6 +82,7 @@
 				550D313F23DE3ED800927EA9 /* Main.storyboard */,
 				550D314723DE3ED900927EA9 /* LaunchScreen.storyboard */,
 				55164EA223DE403300ED78CD /* Controllers */,
+				55A196A023DFA77F0034A256 /* Models */,
 				550D313923DE3ED800927EA9 /* AppDelegate.swift */,
 				550D313B23DE3ED800927EA9 /* SceneDelegate.swift */,
 				550D314523DE3ED900927EA9 /* Assets.xcassets */,
@@ -78,6 +100,23 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		55A196A023DFA77F0034A256 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				55A196A123DFA8650034A256 /* User.swift */,
+				55A196A323DFA8760034A256 /* Task.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		64BCB15C5C3CF525A08E48B3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				518D2E96209EC4F617D76D1A /* Pods_FocusMode.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -85,9 +124,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 550D314D23DE3ED900927EA9 /* Build configuration list for PBXNativeTarget "FocusMode" */;
 			buildPhases = (
+				A26004E11214EDFC9B9B86C1 /* [CP] Check Pods Manifest.lock */,
 				550D313223DE3ED800927EA9 /* Sources */,
 				550D313323DE3ED800927EA9 /* Frameworks */,
 				550D313423DE3ED800927EA9 /* Resources */,
+				E3BF7C17474499A346C430DC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -144,6 +185,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A26004E11214EDFC9B9B86C1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FocusMode-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E3BF7C17474499A346C430DC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FocusMode/Pods-FocusMode-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FocusMode/Pods-FocusMode-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FocusMode/Pods-FocusMode-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		550D313223DE3ED800927EA9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -152,6 +235,8 @@
 				5592388323DE425B00DDC774 /* WelcomeViewController.swift in Sources */,
 				550D313A23DE3ED800927EA9 /* AppDelegate.swift in Sources */,
 				550D313C23DE3ED800927EA9 /* SceneDelegate.swift in Sources */,
+				55A196A223DFA8650034A256 /* User.swift in Sources */,
+				55A196A423DFA8760034A256 /* Task.swift in Sources */,
 				550D314423DE3ED800927EA9 /* FocusMode.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,6 +379,7 @@
 		};
 		550D314E23DE3ED900927EA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D5BDD30C26C91F6F51C128A5 /* Pods-FocusMode.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -313,6 +399,7 @@
 		};
 		550D314F23DE3ED900927EA9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45D43B2AAB6BF5DA4053AC8B /* Pods-FocusMode.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
