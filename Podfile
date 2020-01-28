@@ -7,6 +7,8 @@ target 'FocusMode' do
 
   # Pods for FocusMode
   pod 'Firebase/Auth'
-  pod 'Firebase/Database'
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
 
 end

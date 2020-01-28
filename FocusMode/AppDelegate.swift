@@ -7,14 +7,28 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // initialize the FirebaseApp object
+        FirebaseApp.configure()
+        
+        // initialize Cloud Firestore instance
+        let db = Firestore.firestore()
+        print(db)
+        
+        // Get the currently signed-in user
+        // If not null, bypass WelcomeViewController and make TabBarController as the initial view
+        if Auth.auth().currentUser != nil {
+            print("User is signed in.")
+        } else {
+            print("User not signed in.")
+        }
+        
         return true
     }
 
