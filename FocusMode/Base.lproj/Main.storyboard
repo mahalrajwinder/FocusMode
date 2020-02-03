@@ -519,6 +519,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="All Tasks" id="c8s-6R-Yla">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="JoO-Ql-vVT">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="9lh-xL-nfO" kind="presentation" identifier="ShowAddTodo" id="Fne-hv-vRt"/>
                             </connections>
@@ -527,7 +528,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gfj-r5-erH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2355.072463768116" y="2204.4642857142858"/>
+            <point key="canvasLocation" x="-2433" y="2180"/>
         </scene>
         <!--Task Begin View Controller-->
         <scene sceneID="jkc-RT-dIj">
@@ -746,7 +747,7 @@
             </objects>
             <point key="canvasLocation" x="-3017.3913043478265" y="2993.9732142857142"/>
         </scene>
-        <!--Recommendations-->
+        <!--Recommended-->
         <scene sceneID="K5i-ln-rFd">
             <objects>
                 <viewController id="h3V-4C-k7S" sceneMemberID="viewController">
@@ -765,7 +766,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="XDv-ze-FDt"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Recommendations" id="fXm-nG-DyU"/>
+                    <tabBarItem key="tabBarItem" title="Recommended" image="recommend" id="fXm-nG-DyU"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9pu-62-JYH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -795,7 +796,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qPY-Hi-A8G"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" id="7t3-Az-BPG"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="user" id="7t3-Az-BPG"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0XZ-Ju-Dzw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -812,7 +813,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Vy6-Pu-xnc" kind="relationship" relationship="viewControllers" id="h6E-MB-DP9"/>
+                        <segue destination="JF5-iG-zhw" kind="relationship" relationship="viewControllers" id="fOO-Ta-WJp"/>
                         <segue destination="h3V-4C-k7S" kind="relationship" relationship="viewControllers" id="Bhn-sr-glS"/>
                         <segue destination="iDI-MT-7eI" kind="relationship" relationship="viewControllers" id="AD4-mS-vDv"/>
                     </connections>
@@ -822,31 +823,34 @@
             <point key="canvasLocation" x="-1136" y="535"/>
         </scene>
         <!--Tasks-->
-        <scene sceneID="dra-LH-ZtF">
+        <scene sceneID="70n-An-4gi">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="Vy6-Pu-xnc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Tasks" id="Www-9M-v5V"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JF5-iG-zhw" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Tasks" image="star" id="7mp-Rs-tt4"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="yqW-Yn-WOt">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="krj-B7-hom">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="35"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="73f-kV-8Rr" kind="relationship" relationship="rootViewController" id="kUz-C3-0uj"/>
+                        <segue destination="73f-kV-8Rr" kind="relationship" relationship="rootViewController" id="Od9-lz-tAt"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="E60-G5-gsb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="flL-oB-Nce" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2354" y="1369"/>
+            <point key="canvasLocation" x="-2433" y="1369"/>
         </scene>
     </scenes>
     <resources>
         <image name="Logo" width="512" height="512"/>
+        <image name="recommend" width="25" height="25"/>
+        <image name="star" width="25.5" height="33.5"/>
+        <image name="user" width="25" height="30.5"/>
     </resources>
 </document>
