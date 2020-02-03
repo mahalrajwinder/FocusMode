@@ -21,14 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let db = Firestore.firestore()
         print(db)
         
-        // Get the currently signed-in user
-        // If not null, bypass WelcomeViewController and make TabBarController as the initial view
-        if Auth.auth().currentUser != nil {
-            print("User is signed in.")
-        } else {
-            print("User not signed in.")
-        }
-        
         return true
     }
 
