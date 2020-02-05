@@ -33,6 +33,9 @@ FocusMode continuously tracks the study habits of its users and then builds a pe
 | mostVisitedPlaces | [(latitude, longitude)] | array of coordinates of user's most visited places. Maximum 10 places |
 
 #### Task
+
+1. **Todo**
+
 | Property       | Type     | Description |
 | -------------  | -------- | ------------|
 | tid            | String   | task's unique identifier |
@@ -42,6 +45,23 @@ FocusMode continuously tracks the study habits of its users and then builds a pe
 | subject        | String   | task's academic subject { Science, Mathematics, Computer Science / Engineering, English / Writing, Social Studies, General / Other } |
 | priority          | Number | task's importance. Lowest number represents the highest priority |
 | predictedDuration | Number | how long would user take to complete the task |
+| totalBreaks       | Number | how many breaks user took to complete the task |
+| breakDuration     | Number | total break time user took while working on the task |
+| totalDistractions | Number | how many times the user got distracted while working on the task |
+| start             | String | when did the user start working on the task |
+| temperatureRange  | Number | minimum and maximum temperature in Fahrenheit for working on the task |
+| suitedLocations   | Coordinates | location coordinates of places where user should work on the task |
+
+2. **Completed**
+
+| Property       | Type     | Description |
+| -------------  | -------- | ------------|
+| tid            | String   | task's unique identifier |
+| title          | String   | task's title / short description |
+| dueDate        | String   | task's due date |
+| category       | String   | type of task { Homework, Exam, Quiz, Project, Other } |
+| subject        | String   | task's academic subject { Science, Mathematics, Computer Science / Engineering, English / Writing, Social Studies, General / Other } |
+| priority          | Number | task's importance. Lowest number represents the highest priority |
 | observedDuration  | Number | Actual time user took to complete the task |
 | totalBreaks       | Number | how many breaks user took to complete the task |
 | breakDuration     | Number | total break time user took while working on the task |
