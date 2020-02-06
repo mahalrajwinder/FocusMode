@@ -25,11 +25,12 @@ FocusMode continuously tracks the study habits of its users and then builds a pe
 | bedtime        | String   | user's bedtime { HH:MM AM/PM } |
 | major          | String   | user's academic major |
 | dailyGoal      | Number   | how many minutes the user wants to work/study daily |
+| activity       | Number   | tracks user's daily activity (how much user studies so far). Resets to 0 at midnight |
 | deadlineSuccessRate | Number | how often the user meets the given deadlines { between 0 and 1 } |
 | handlingPriorities  | Number | user's ability to adjust to changing priorities { between 0 and 1 } |
 | tasksCreated   | Number      | total number of tasks ever created by the user |
 | tasksCompleted | Number      | total number of tasks ever completed by the user |
-| rankedDays     | [String] | array of days of weeks ranked based on user's productivity on each day |
+| rankedDays     | [Number]    | array of days of weeks ranked based on user's productivity on each day |
 | mostVisitedPlaces | [(latitude, longitude)] | array of coordinates of user's most visited places. Maximum 10 places |
 
 #### Task
