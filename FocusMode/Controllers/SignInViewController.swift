@@ -37,9 +37,10 @@ class SignInViewController: UIViewController {
                 print(error!.localizedDescription)
                 return
             }
-            print("\(user.email!) signed in")
             
-            let  tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController")
+            UserDefaults.standard.set(user.uid, forKey: "uid")
+            
+            let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController")
             self.view.window?.rootViewController = tabBarController
         }
     }

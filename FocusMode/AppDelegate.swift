@@ -18,8 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         // initialize Cloud Firestore instance
-        let db = Firestore.firestore()
-        print(db)
+        let _ = Firestore.firestore()
         
         return true
     }

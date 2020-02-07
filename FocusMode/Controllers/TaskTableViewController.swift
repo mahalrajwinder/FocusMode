@@ -6,13 +6,11 @@
 //
 
 import UIKit
-import Firebase
 
 class TaskTableViewController: UITableViewController {
     
-    var handle: AuthStateDidChangeListenerHandle?
-    var db: Firestore!
-    var tasks = [Task]()
+    var db: Database!
+    var tasks = [Todo]()
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -21,53 +19,36 @@ class TaskTableViewController: UITableViewController {
         
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        Auth.auth().removeStateDidChangeListener(handle!) // remove_auth_listener
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // [START db setup]
-        let settings = FirestoreSettings()
-        Firestore.firestore().settings = settings
-        // [END db setup]
-        db = Firestore.firestore()
+        // Initialize the Database
+        db = Database()
         
-        // [START auth_listener]
-        handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
-            let uid = user?.uid
-            let todoRef = self.db.collection("tasks").document(uid!).collection("todo")
-            
-            todoRef.getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        let tid = document.documentID
-                        let data = document.data()
-                        let title = data["title"] as! String
-                        let date = data["dueDate"] as! String
-                        let category = data["category"] as! String
-                        let subject = data["subject"] as! String
-                        let priority = data["priority"] as! Double
-                        
-                        let task = Task(tid: tid, title: title, dueDate: date, category: category, subject: subject, priority: priority)
-                        
-                        self.tasks.append(task)
-                    }
-                    self.tableView.reloadData()
-                }
-            }
-        })
-        // [END auth_listener]
+        loadTodos()
         
         // Observer for handling new task
         let nc = NotificationCenter.default
         nc.addObserver(self, selector:#selector(reloadWithNewTask), name: NSNotification.Name ("newTask"), object: nil)
     }
     
+    func loadTodos() {
+        let uid = UserDefaults.standard.string(forKey: "uid")!
+        
+        self.db.getTodos(uid: uid, completion: { (todos, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                self.tasks = todos!
+                self.tableView.reloadData()
+            }
+        })
+    }
+    
     @objc func reloadWithNewTask(_ notification: Notification) {
-        let task = notification.userInfo?["task"] as! Task
+        let task = notification.userInfo?["task"] as! Todo
         self.tasks.append(task)
         self.tableView.reloadData()
     }
@@ -87,7 +68,7 @@ class TaskTableViewController: UITableViewController {
         
         let task = tasks[indexPath.row]
         cell.titleLabel.text = task.title
-        cell.dateLabel.text = task.dueDate
+        cell.dateLabel.text = parseDTM_toStr(task.dueDate)
         
         return cell
     }
@@ -108,5 +89,11 @@ class TaskTableViewController: UITableViewController {
             // De-selects the selected task cell
             tableView.deselectRow(at: indexPath, animated: true)
         }
+    }
+    
+    // MARK: - Private Methods
+    
+    private func parseDTM_toStr(_ dtm: DTM) -> String {
+        return "\(dtm.month)/\(dtm.day)/\(dtm.year), \(dtm.hour):\(dtm.minute):\(dtm.second)"
     }
 }

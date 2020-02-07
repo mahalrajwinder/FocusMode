@@ -2,7 +2,6 @@
 //  ProfileViewController.swift
 //  FocusMode
 //
-//  Created by Rajwinder on 1/28/20.
 //  Copyright © 2020 Rajwinder Singh. All rights reserved.
 //
 
@@ -13,14 +12,13 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func didTapSignOut(_ sender: Any) {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
+            UserDefaults.standard.removeObject(forKey: "uid")
             let  welcomeViewController = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeViewController")
             self.view.window?.rootViewController = welcomeViewController
         } catch let signOutError as NSError {

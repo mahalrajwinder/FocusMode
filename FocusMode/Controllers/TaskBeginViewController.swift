@@ -9,7 +9,7 @@ import UIKit
 
 class TaskBeginViewController: UIViewController {
     
-    var task: Task!
+    var task: Todo!
     
     override func viewDidLoad() {
         super.viewDidLoad()
