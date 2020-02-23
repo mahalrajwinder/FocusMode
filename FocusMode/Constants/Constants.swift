@@ -34,12 +34,68 @@ let SUBJECT_PICKER_DATA: [String] = [
     "General / Other",
 ]
 
-let DAYS_INDEX = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Firday",
-    "Saturday",
-    "Sunday",
+let DAYS_INDEX: [[String: Any]] = [
+    [
+        "day": "Monday",
+        "minutesWorked": 0,
+        "count": 0,
+        "totalBreaks": 0,
+        "breakDuration": 0,
+        "totalDistractions": 0,
+        "productivity": 0.0
+    ],
+    [
+        "day": "Tuesday",
+        "minutesWorked": 0,
+        "count": 0,
+        "totalBreaks": 0,
+        "breakDuration": 0,
+        "totalDistractions": 0,
+        "productivity": 0.0
+    ],
+    [
+        "day": "Wednesday",
+        "minutesWorked": 0,
+        "count": 0,
+        "totalBreaks": 0,
+        "breakDuration": 0,
+        "totalDistractions": 0,
+        "productivity": 0.0
+    ],
+    [
+        "day": "Thursday",
+        "minutesWorked": 0,
+        "count": 0,
+        "totalBreaks": 0,
+        "breakDuration": 0,
+        "totalDistractions": 0,
+        "productivity": 0.0
+    ],
+    [
+        "day": "Firday",
+        "minutesWorked": 0,
+        "count": 0,
+        "totalBreaks": 0,
+        "breakDuration": 0,
+        "totalDistractions": 0,
+        "productivity": 0.0
+    ],
+    [
+        "day": "Saturday",
+        "minutesWorked": 0,
+        "count": 0,
+        "totalBreaks": 0,
+        "breakDuration": 0,
+        "totalDistractions": 0,
+        "productivity": 0.0
+    ],
+    [
+        "day": "Sunday",
+        "minutesWorked": 0,
+        "count": 0,
+        "totalBreaks": 0,
+        "breakDuration": 0,
+        "totalDistractions": 0,
+        "productivity": 0.0
+    ],
 ]

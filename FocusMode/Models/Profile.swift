@@ -24,3 +24,20 @@ struct Profile {
     let handlingPrioritiesRate: Double // How well the user deal with changing priorities
     let hardworkingRate: Double
 }
+
+struct UserModel {
+    let uid: String
+    let tasksCreated: Int
+    let tasksCompleted: Int
+    let daysIndex: [[String: Any]]
+    let mostVisitedPlaces: [Coords]
+    let averageDistractions: Int
+    let averageBreakDuration: Int
+    let averageTaskDuration: Int
+    let mostFrequentSubject: String
+    let mostFrequentCategory: String
+    let mostMissedDeadlinesTaskSubject: String
+    let mostMissedDeadlinesTaskCategory: String
+    let activity: Int // number of minutes study. Reset to 0 at midnight.
+    let tempRange: [String : Double]
+}

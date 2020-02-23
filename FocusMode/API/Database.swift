@@ -49,6 +49,35 @@ class Database {
         }
     }
     
+    func createUserModel(profile: Profile,
+                       completion: @escaping (Error?) -> Void) {
+        // Get similar user data
+        let places = parseCoordsArrayToObj([Coords(0.0, 0.0)])
+        let tempRange = ["min": 0.0, "max": 0.0]
+        
+        self.db.collection("model").document(profile.uid).setData([
+            "tasksCreated": 0,
+            "tasksCompleted": 0,
+            "daysIndex": DAYS_INDEX,
+            "mostVisitedPlaces": places,
+            "averageDistractions": 0,
+            "averageBreakDuration": 0,
+            "averageTaskDuration": 0,
+            "mostFrequentSubject": "CS",
+            "mostFrequentCategory": "HW",
+            "mostMissedDeadlinesSubject": "CS",
+            "mostMissedDeadlinesCategory": "HW",
+            "activity": 0,
+            "tempRange": tempRange
+        ]) { err in
+            if let err = err {
+                completion(err)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
     func incrementTasksCreated(uid: String) {
         //
     }

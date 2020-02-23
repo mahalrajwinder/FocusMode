@@ -74,7 +74,15 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 if let err = err {
                     print("Error adding document: \(err)")
                 } else {
-                    print("Document successfully written!)")
+                    print("Profile successfully written!)")
+                }
+            })
+            
+            self.db.createUserModel(profile: profile, completion: { (err) in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    print("User Model successfully written!)")
                 }
             })
                         
