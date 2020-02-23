@@ -115,7 +115,7 @@ class Database {
             data = doc.data()
             let tid = doc.documentID
             let title = data["title"] as! String
-            let date = parseObjToDTM(data["dueDate"] as! [String : Int])
+            let date = parseObjToDTM(data["dueDate"] as! [String : Any])
             let category = data["category"] as! String
             let subject = data["subject"] as! String
             let priority = data["priority"] as! Int
@@ -123,7 +123,7 @@ class Database {
             let breaks = data["totalBreaks"] as! Int
             let breakDuration = data["breakDuration"] as! Int
             let distractions = data["totalDistractions"] as! Int
-            let startBy = parseObjToDTM(data["startBy"] as! [String : Int])
+            let startBy = parseObjToDTM(data["startBy"] as! [String : Any])
             let tempRange = data["tempRange"] as! [String : Double]
             let places = parseObjToCoordsArray(data["prefPlaces"] as! [[String : Double]])
             
@@ -176,11 +176,11 @@ class Database {
         return Coords(lat, long)
     }
     
-    private func parseTM_toObj(_ tm: TM) -> [String: Int] {
+    private func parseTM_toObj(_ tm: TM) -> [String: Any] {
         return [
             "hour": tm.hour,
             "minute": tm.minute,
-            "second": tm.second,
+            "amPm": tm.amPm,
         ]
     }
     
@@ -192,23 +192,23 @@ class Database {
         ]
     }
     
-    private func parseDTM_toObj(_ dtm: DTM) -> [String: Int] {
+    private func parseDTM_toObj(_ dtm: DTM) -> [String: Any] {
         return [
             "year": dtm.year,
             "month": dtm.month,
             "day": dtm.day,
             "hour": dtm.hour,
             "minute": dtm.minute,
-            "second": dtm.second,
+            "amPm": dtm.amPm,
         ]
     }
     
-    private func parseObjToTM(_ tm: [String: Int]) -> TM {
-        let h = tm["hour"]!
-        let m = tm["minute"]!
-        let s = tm["second"]!
+    private func parseObjToTM(_ tm: [String: Any]) -> TM {
+        let h = tm["hour"] as! Int
+        let m = tm["minute"] as! Int
+        let amPm = tm["amPm"] as! String
         
-        return TM(h, m, s)
+        return TM(h, m, amPm)
     }
     
     private func parseObjToDT(_ dt: [String: Int]) -> DT {
@@ -219,14 +219,14 @@ class Database {
         return DT(y, m, d)
     }
     
-    private func parseObjToDTM(_ dtm: [String: Int]) -> DTM {
-        let y = dtm["year"]!
-        let m = dtm["month"]!
-        let d = dtm["day"]!
-        let h = dtm["hour"]!
-        let min = dtm["minute"]!
-        let s = dtm["second"]!
+    private func parseObjToDTM(_ dtm: [String: Any]) -> DTM {
+        let y = dtm["year"] as! Int
+        let m = dtm["month"] as! Int
+        let d = dtm["day"] as! Int
+        let h = dtm["hour"] as! Int
+        let min = dtm["minute"] as! Int
+        let amPm = dtm["amPm"] as! String
         
-        return DTM(y, m, d, h, min, s)
+        return DTM(y, m, d, h, min, amPm)
     }
 }

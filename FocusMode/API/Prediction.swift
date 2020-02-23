@@ -16,7 +16,7 @@ func getInitialPredictions(title: String,
     return [
         "priority": 0,
         "predictedDuration": 0,
-        "startBy": DTM(0,0,0,0,0,0),
+        "startBy": DTM(0,0,0,0,0,"AM"),
         "tempRange": [
             "min": 0.0,
             "max": 0.0,

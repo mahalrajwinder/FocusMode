@@ -94,6 +94,9 @@ class TaskTableViewController: UITableViewController {
     // MARK: - Private Methods
     
     private func parseDTM_toStr(_ dtm: DTM) -> String {
-        return "\(dtm.month)/\(dtm.day)/\(dtm.year), \(dtm.hour):\(dtm.minute):\(dtm.second)"
+        let str = String(format: "%02d/%02d/%02d, %02d:%02d ",
+                         dtm.month, dtm.day, dtm.year,
+                         dtm.hour, dtm.minute)
+        return str + dtm.amPm
     }
 }

@@ -36,7 +36,7 @@ struct DT {
 struct TM {
     var hour: Int
     var minute: Int
-    var second: Int
+    var amPm: String
     
     init(_ datePicker: UIDatePicker) {
         let dtStr = dateStr(datePicker)
@@ -44,13 +44,13 @@ struct TM {
         
         self.hour = time.hour
         self.minute = time.minute
-        self.second = time.second
+        self.amPm = time.amPm
     }
     
-    init(_ hour: Int, _ minute: Int, _ second: Int) {
+    init(_ hour: Int, _ minute: Int, _ amPm: String) {
         self.hour = hour
         self.minute = minute
-        self.second = second
+        self.amPm = amPm
     }
 }
 
@@ -62,16 +62,16 @@ struct DTM {
     let day: Int
     let hour: Int
     let minute: Int
-    let second: Int
+    let amPm: String
     
     init(_ year: Int, _ month: Int, _ day: Int,
-         _ hour: Int, _ minute: Int, _ second: Int) {
+         _ hour: Int, _ minute: Int, _ amPm: String) {
         self.year = year
         self.month = month
         self.day = day
         self.hour = hour
         self.minute = minute
-        self.second = second
+        self.amPm = amPm
     }
     
     init(_ datePicker: UIDatePicker) {
@@ -83,7 +83,7 @@ struct DTM {
         self.day = dt.day
         self.hour = tm.hour
         self.minute = tm.minute
-        self.second = tm.second
+        self.amPm = tm.amPm
     }
 }
 
@@ -98,10 +98,28 @@ private func dateStr(_ datePicker: UIDatePicker) -> String {
 }
 
 private func parseDate(_ dateStr: String) -> DT {
-    
-    return DT(0, 0, 0)
+    var dateArr = dateStr.components(separatedBy: ",")
+    dateArr = dateArr[0].components(separatedBy: "/")
+    let month = Int(dateArr[0])!
+    let day = Int(dateArr[1])!
+    let year = Int(dateArr[2])!
+    return DT(year, month, day)
 }
 
 private func parseTime(_ dateStr: String) -> TM {
-    return TM(0, 0, 0)
+    print(dateStr)
+    var timeArr = dateStr.components(separatedBy: " ")
+    var amPm: String
+    
+    if timeArr.count == 3 {
+        amPm = timeArr[2]
+        timeArr = timeArr[1].components(separatedBy: ":")
+    } else {
+        amPm = timeArr[1]
+        timeArr = timeArr[0].components(separatedBy: ":")
+    }
+    
+    let minute = Int(timeArr[1])!
+    let hour = Int(timeArr[0])!
+    return TM(hour, minute, amPm)
 }
