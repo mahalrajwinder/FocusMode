@@ -24,9 +24,9 @@ class Database {
     func createProfile(profile: Profile,
                        completion: @escaping (Error?) -> Void) {
         let bedtime = parseTM_toObj(profile.bedtime)
-        let places = parseCoordsArrayToObj(profile.mostVisitedPlaces)
+        let address = parseCoordsToObj(profile.address)
                 
-        self.db.collection("users").document(profile.uid).setData([
+        self.db.collection("profile").document(profile.uid).setData([
             "name": profile.name,
             "age": profile.age,
             "gender": profile.gender,
@@ -38,13 +38,8 @@ class Database {
             "dailyGoal": profile.dailyGoal,
             "successRate": profile.successRate,
             "handlingPrioritiesRate": profile.handlingPrioritiesRate,
-            "tasksCreated": profile.tasksCreated,
-            "tasksCompleted": profile.tasksCompleted,
-            "daysIndex": profile.daysIndex,
-            "activity": profile.activity,
-            "mostVisitedPlaces": places,
-            "averageSteps": profile.averageSteps,
-            "averageCalories": profile.averageCalories,
+            "hardworkingRate": profile.hardworkingRate,
+            "address": address
         ]) { err in
             if let err = err {
                 completion(err)

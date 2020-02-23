@@ -15,17 +15,12 @@ struct Profile {
     let gender: String
     let height: Double // in centimeters
     let weight: Double // in pounds
-    let timePreference: String // morning or night
-    let bedtime: TM
+    let address: Coords
     let major: String
+    let timePreference: String // morning or night
     let dailyGoal: Int // in minutes
+    let bedtime: TM
     let successRate: Double // how often user meets the given deadlines
     let handlingPrioritiesRate: Double // How well the user deal with changing priorities
-    let tasksCreated: Int
-    let tasksCompleted: Int
-    let daysIndex: [String]
-    let activity: Int
-    let mostVisitedPlaces: [Coords]
-    let averageSteps: Int
-    let averageCalories: Int
+    let hardworkingRate: Double
 }

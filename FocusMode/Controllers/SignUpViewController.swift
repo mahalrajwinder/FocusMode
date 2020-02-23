@@ -16,6 +16,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var ageTextField: UITextField!
     @IBOutlet weak var heightTextField: UITextField!
     @IBOutlet weak var weightTextField: UITextField!
+    @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var genderPicker: UISegmentedControl!
     @IBOutlet weak var timePrefPicker: UISegmentedControl!
     @IBOutlet weak var bedtimePicker: UIDatePicker!
@@ -23,6 +24,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var studyGoalPicker: UIDatePicker!
     @IBOutlet weak var deadlineMetPicker: UISlider!
     @IBOutlet weak var handlingPrioritiesPicker: UISlider!
+    @IBOutlet weak var hardworkingRatePicker: UISlider!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var signUpBtn: UIButton!
     
@@ -117,16 +119,14 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         let goal = Int(studyGoalPicker.countDownDuration / 60) // in minutes
         let successRate = Double(deadlineMetPicker.value)
         let prioritiesRate = Double(handlingPrioritiesPicker.value)
-        let places = [Coords(0.0, 0.0)]
-        
+        let workingRate = Double(hardworkingRatePicker.value)
+        let address = getCoordsFromAddress(address: addressTextField.text!)
         
         return Profile(uid: uid, name: name, age: age, gender: gender,
-                       height: height, weight: weight, timePreference: timePref,
-                       bedtime: bedtime, major: major, dailyGoal: goal,
-                       successRate: successRate,
-                       handlingPrioritiesRate: prioritiesRate, tasksCreated: 0,
-                       tasksCompleted: 0, daysIndex: DAYS_INDEX, activity: 0,
-                       mostVisitedPlaces: places, averageSteps: 0,
-                       averageCalories: 0)
+                       height: height, weight: weight, address: address,
+                       major: major, timePreference: timePref, dailyGoal: goal,
+                       bedtime: bedtime, successRate: successRate,
+                       handlingPrioritiesRate: prioritiesRate,
+                       hardworkingRate: workingRate)
     }
 }

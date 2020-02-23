@@ -18,6 +18,7 @@
 		5550A0BB23E33A2400AD4034 /* TaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550A0BA23E33A2400AD4034 /* TaskTableViewController.swift */; };
 		5550A0BE23E33AF400AD4034 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550A0BD23E33AF400AD4034 /* TaskCell.swift */; };
 		555ACAB923EC9CFD000EF3AC /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555ACAB823EC9CFD000EF3AC /* DateTime.swift */; };
+		5578E6C32402383100459D6A /* GPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5578E6C22402383100459D6A /* GPS.swift */; };
 		557C8B4623ECF5CF00B1B2D2 /* AuthListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557C8B4523ECF5CF00B1B2D2 /* AuthListener.swift */; };
 		558AF88223E33C0B00940DEA /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558AF88123E33C0B00940DEA /* TaskDetailsViewController.swift */; };
 		5592388323DE425B00DDC774 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5592388223DE425B00DDC774 /* WelcomeViewController.swift */; };
@@ -49,6 +50,7 @@
 		5550A0BA23E33A2400AD4034 /* TaskTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewController.swift; sourceTree = "<group>"; };
 		5550A0BD23E33AF400AD4034 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		555ACAB823EC9CFD000EF3AC /* DateTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTime.swift; sourceTree = "<group>"; };
+		5578E6C22402383100459D6A /* GPS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPS.swift; sourceTree = "<group>"; };
 		557C8B4523ECF5CF00B1B2D2 /* AuthListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthListener.swift; sourceTree = "<group>"; };
 		558AF88123E33C0B00940DEA /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
 		5592388223DE425B00DDC774 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				55EBDEB523EBFC2000907856 /* Database.swift */,
 				55F71EEE23ECB056006D3EC0 /* Prediction.swift */,
 				557C8B4523ECF5CF00B1B2D2 /* AuthListener.swift */,
+				5578E6C22402383100459D6A /* GPS.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				550D314423DE3ED800927EA9 /* FocusMode.xcdatamodeld in Sources */,
 				55EBDEB623EBFC2000907856 /* Database.swift in Sources */,
 				555ACAB923EC9CFD000EF3AC /* DateTime.swift in Sources */,
+				5578E6C32402383100459D6A /* GPS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
