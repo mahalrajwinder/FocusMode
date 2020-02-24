@@ -40,4 +40,5 @@ struct UserModel {
     let mostMissedDeadlinesTaskCategory: String
     let activity: Int // number of minutes study. Reset to 0 at midnight.
     let tempRange: [String : Double]
+    let avgSteps: Int
 }

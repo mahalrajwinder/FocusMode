@@ -54,7 +54,9 @@ class Database {
         // Get similar user data
         let places = parseCoordsArrayToObj([Coords(0.0, 0.0)])
         let tempRange = ["min": 0.0, "max": 0.0]
-        
+//        HealthKitManager().getTodaysSteps(completion: { (steps) in
+//            print("Steps: \(steps)")
+//        })
         self.db.collection("model").document(profile.uid).setData([
             "tasksCreated": 0,
             "tasksCompleted": 0,
@@ -68,7 +70,8 @@ class Database {
             "mostMissedDeadlinesSubject": "CS",
             "mostMissedDeadlinesCategory": "HW",
             "activity": 0,
-            "tempRange": tempRange
+            "tempRange": tempRange,
+            "avgSteps": 0
         ]) { err in
             if let err = err {
                 completion(err)
