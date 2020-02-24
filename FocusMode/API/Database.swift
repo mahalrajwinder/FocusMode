@@ -131,6 +131,24 @@ class Database {
         }
     }
     
+    func markTodoDone(uid: String, todo: Todo) {
+        let tasksRef = self.db.collection("tasks").document(uid)
+        
+        tasksRef.collection("done").document(todo.tid!).setData([
+            "title": todo.title
+        ], merge: true) { err in
+            if let err = err {
+                print("Error marking todo done: \(err)")
+            }
+        }
+        
+        tasksRef.collection("todo").document(todo.tid!).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            }
+        }
+    }
+    
     func getTodos(uid: String,
                   completion: @escaping ([Todo]?, Error?) -> Void) {
         let tasksRef = self.db.collection("tasks")

@@ -19,8 +19,11 @@ class RatingViewController: UIViewController {
     
     @IBAction func didTapSubmit(_ sender: Any) {
         // get rating information
-        // save todo in the database
-        // send notification to referesh task list. Listened by Tasks and Recomendation VC
+        // Create DoneTask object
+        
+        let nc = NotificationCenter.default
+        nc.post(name: NSNotification.Name("deleteTodo"), object: nil, userInfo: ["deleteTodo": todo!])
+        
         let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController")
         self.view.window?.rootViewController = tabBarController
     }

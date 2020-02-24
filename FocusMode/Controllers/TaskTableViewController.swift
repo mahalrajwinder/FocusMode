@@ -29,9 +29,13 @@ class TaskTableViewController: UITableViewController {
         
         loadTodos()
         
-        // Observer for handling new task
         let nc = NotificationCenter.default
+        
+        // Observer for handling new task
         nc.addObserver(self, selector:#selector(reloadWithNewTodo), name: NSNotification.Name ("newTodo"), object: nil)
+        
+        // Observer for handling completion of a task
+        nc.addObserver(self, selector:#selector(deleteTodo), name: NSNotification.Name ("deleteTodo"), object: nil)
     }
     
     func loadTodos() {
@@ -45,6 +49,19 @@ class TaskTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         })
+    }
+    
+    @objc func deleteTodo(_ notification: Notification) {
+        let todo = notification.userInfo?["deleteTodo"] as! Todo
+        for i in 0..<tasks.count {
+            if tasks[i].tid == todo.tid {
+                tasks.remove(at: i)
+                break
+            }
+        }
+        let uid = UserDefaults.standard.string(forKey: "uid")!
+        db.markTodoDone(uid: uid, todo: todo)
+        self.tableView.reloadData()
     }
     
     @objc func reloadWithNewTodo(_ notification: Notification) {

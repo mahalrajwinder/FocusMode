@@ -67,7 +67,7 @@ class TaskBeginViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func didTapDone(_ sender: Any) {
         timer?.invalidate()
         timer = nil
-        // Save the current time in Todo
+        // Update tasks fields
         performSegue(withIdentifier: "showRatingSegue", sender: nil)
     }
     
