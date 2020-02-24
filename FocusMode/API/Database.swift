@@ -172,6 +172,16 @@ class Database {
                 pauseTime = parseObjToDTM(ptime as! [String : Any])
             }
             
+            var trackedTemp: [Double]? = nil
+            if let tTemp = data["trackedTemp"] {
+                trackedTemp = tTemp as? [Double]
+            }
+            
+            var trackedPlaces: [[String: Any]]? = nil
+            if let tPlaces = data["trackedPlaces"] {
+                trackedPlaces = tPlaces as? [[String: Any]]
+            }
+            
             let todo = Todo(tid: tid, title: title, dueDate: date,
                             category: category, subject: subject,
                             rawPriority: rawPriority, priority: priority,
@@ -179,7 +189,8 @@ class Database {
                             pauseTime: pauseTime, totalBreaks: breaks,
                             breakDuration: breakDuration,
                             totalDistractions: distractions,
-                            averageTemp: temp, prefPlaces: places)
+                            averageTemp: temp, prefPlaces: places,
+                            trackedTemp: trackedTemp, trackedPlaces: trackedPlaces)
             todos.append(todo)
         }
         

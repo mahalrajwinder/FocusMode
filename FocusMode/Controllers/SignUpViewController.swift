@@ -69,23 +69,33 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             }
             
             UserDefaults.standard.set(user.uid, forKey: "uid")
-            let profile = self.getProfile(uid: user.uid)
-            self.db.createProfile(profile: profile, completion: { (err) in
+            
+            self.getProfile(uid: user.uid, completion: { (profile, err) in
                 if let err = err {
-                    print("Error adding document: \(err)")
+                    print("Error getting profile: \(err)")
                 } else {
-                    print("Profile successfully written!)")
+                    // [START saving profile in database]
+                    self.db.createProfile(profile: profile!, completion: { (err) in
+                        if let err = err {
+                            print("Error adding document: \(err)")
+                        } else {
+                            print("Profile successfully written!)")
+                        }
+                    })
+                    // [END saving profile in database]
+                    
+                    // [START saving user model in database]
+                    self.db.createUserModel(profile: profile!, completion: { (err) in
+                        if let err = err {
+                            print("Error adding document: \(err)")
+                        } else {
+                            print("User Model successfully written!)")
+                        }
+                    })
+                    // [END saving user model in database]
                 }
             })
             
-            self.db.createUserModel(profile: profile, completion: { (err) in
-                if let err = err {
-                    print("Error adding document: \(err)")
-                } else {
-                    print("User Model successfully written!)")
-                }
-            })
-                        
             let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController")
             self.view.window?.rootViewController = tabBarController
         }
@@ -115,7 +125,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     // MARK: - Private Methods
     
-    private func getProfile(uid: String) -> Profile {
+    private func getProfile(uid: String, completion: @escaping (Profile?, Error?) -> Void) {
         let name = nameTextField.text!
         let age = Int(ageTextField.text!)!
         let gender = genderPicker.selectedSegmentIndex == 0 ? "Male" : "Female"
@@ -128,13 +138,20 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         let successRate = Double(deadlineMetPicker.value)
         let prioritiesRate = Double(handlingPrioritiesPicker.value)
         let workingRate = Double(hardworkingRatePicker.value)
-        let address = getCoordsFromAddress(address: addressTextField.text!)
         
-        return Profile(uid: uid, name: name, age: age, gender: gender,
-                       height: height, weight: weight, address: address,
-                       major: major, timePreference: timePref, dailyGoal: goal,
-                       bedtime: bedtime, successRate: successRate,
-                       handlingPrioritiesRate: prioritiesRate,
-                       hardworkingRate: workingRate)
+        getCoordsFromAddress(address: addressTextField.text!, completion: { (coords, err) in
+            if let err = err {
+                completion(nil, err)
+            } else {
+                let profile = Profile(uid: uid, name: name, age: age, gender: gender,
+                                      height: height, weight: weight, address: coords!,
+                                      major: major, timePreference: timePref, dailyGoal: goal,
+                                      bedtime: bedtime, successRate: successRate,
+                                      handlingPrioritiesRate: prioritiesRate,
+                                      hardworkingRate: workingRate)
+                
+                completion(profile, nil)
+            }
+        })
     }
 }

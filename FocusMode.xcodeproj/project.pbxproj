@@ -58,6 +58,7 @@
 		5592388223DE425B00DDC774 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		5592CB6923E7FC7B002B313C /* TaskBeginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskBeginViewController.swift; sourceTree = "<group>"; };
 		55A196A323DFA8760034A256 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		55A44CBD24037358004304EB /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		55B6C4DA23E00BCE00EA22DF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		55B6C4DC23E00BF000EA22DF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		55B6C4DE23E0227200EA22DF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +190,7 @@
 		64BCB15C5C3CF525A08E48B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55A44CBD24037358004304EB /* HealthKit.framework */,
 				518D2E96209EC4F617D76D1A /* Pods_FocusMode.framework */,
 			);
 			name = Frameworks;
@@ -477,6 +479,7 @@
 			baseConfigurationReference = D5BDD30C26C91F6F51C128A5 /* Pods-FocusMode.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FocusMode/FocusMode.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2857UKB4VV;
 				INFOPLIST_FILE = FocusMode/Info.plist;
@@ -497,6 +500,7 @@
 			baseConfigurationReference = 45D43B2AAB6BF5DA4053AC8B /* Pods-FocusMode.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FocusMode/FocusMode.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2857UKB4VV;
 				INFOPLIST_FILE = FocusMode/Info.plist;

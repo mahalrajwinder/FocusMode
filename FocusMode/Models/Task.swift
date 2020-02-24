@@ -23,6 +23,8 @@ struct Todo {
     var totalDistractions: Int? = 0
     var averageTemp: Double? = nil
     var prefPlaces: [Coords]? = nil
+    var trackedTemp: [Double]? = nil
+    var trackedPlaces: [[String: Any]]? = nil
 }
 
 struct DoneTask {
