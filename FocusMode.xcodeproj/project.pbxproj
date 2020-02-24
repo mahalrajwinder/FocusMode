@@ -3,11 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		550651AB2403C92900F71A75 /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		550651AB2403C92900F71A75 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		550D313A23DE3ED800927EA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D313923DE3ED800927EA9 /* AppDelegate.swift */; };
 		550D313C23DE3ED800927EA9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D313B23DE3ED800927EA9 /* SceneDelegate.swift */; };
 		550D314123DE3ED800927EA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550D313F23DE3ED800927EA9 /* Main.storyboard */; };
@@ -20,6 +20,9 @@
 		555ACAB923EC9CFD000EF3AC /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555ACAB823EC9CFD000EF3AC /* DateTime.swift */; };
 		5578E6C32402383100459D6A /* GPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5578E6C22402383100459D6A /* GPS.swift */; };
 		557C8B4623ECF5CF00B1B2D2 /* AuthListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557C8B4523ECF5CF00B1B2D2 /* AuthListener.swift */; };
+		55808CFA240452FF00CB8FFB /* SeeAllTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55808CF9240452FF00CB8FFB /* SeeAllTableViewController.swift */; };
+		55808CFC240455DD00CB8FFB /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55808CFB240455DD00CB8FFB /* PlaceCell.swift */; };
+		55808CFE2404583800CB8FFB /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55808CFD2404583800CB8FFB /* RatingViewController.swift */; };
 		558850912403C6FA00D92AEF /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A44CBD24037358004304EB /* HealthKit.framework */; };
 		558AF88223E33C0B00940DEA /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558AF88123E33C0B00940DEA /* TaskDetailsViewController.swift */; };
 		5592388323DE425B00DDC774 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5592388223DE425B00DDC774 /* WelcomeViewController.swift */; };
@@ -48,7 +51,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				550651AB2403C92900F71A75 /* BuildFile in Embed Frameworks */,
+				550651AB2403C92900F71A75 /* (null) in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +74,9 @@
 		555ACAB823EC9CFD000EF3AC /* DateTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTime.swift; sourceTree = "<group>"; };
 		5578E6C22402383100459D6A /* GPS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPS.swift; sourceTree = "<group>"; };
 		557C8B4523ECF5CF00B1B2D2 /* AuthListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthListener.swift; sourceTree = "<group>"; };
+		55808CF9240452FF00CB8FFB /* SeeAllTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllTableViewController.swift; sourceTree = "<group>"; };
+		55808CFB240455DD00CB8FFB /* PlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
+		55808CFD2404583800CB8FFB /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		558AF88123E33C0B00940DEA /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
 		5592388223DE425B00DDC774 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		5592CB6923E7FC7B002B313C /* TaskBeginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskBeginViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +172,8 @@
 				558AF88123E33C0B00940DEA /* TaskDetailsViewController.swift */,
 				5592CB6923E7FC7B002B313C /* TaskBeginViewController.swift */,
 				55EC12D4240320E5001DEFC7 /* PlacesTableViewController.swift */,
+				55808CF9240452FF00CB8FFB /* SeeAllTableViewController.swift */,
+				55808CFD2404583800CB8FFB /* RatingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -175,6 +183,7 @@
 			children = (
 				5550A0BD23E33AF400AD4034 /* TaskCell.swift */,
 				55A44CC42403BC72004304EB /* PlaceTableViewCell.swift */,
+				55808CFB240455DD00CB8FFB /* PlaceCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -341,6 +350,7 @@
 				5550A0BB23E33A2400AD4034 /* TaskTableViewController.swift in Sources */,
 				55D4B8D923EBD97B00914112 /* Constants.swift in Sources */,
 				55A44CC124038B01004304EB /* HealthKitManager.swift in Sources */,
+				55808CFA240452FF00CB8FFB /* SeeAllTableViewController.swift in Sources */,
 				55D4B8D423EBD09600914112 /* Weather.swift in Sources */,
 				5592388323DE425B00DDC774 /* WelcomeViewController.swift in Sources */,
 				55B6C4DB23E00BCE00EA22DF /* SignUpViewController.swift in Sources */,
@@ -350,6 +360,7 @@
 				55A44CC52403BC72004304EB /* PlaceTableViewCell.swift in Sources */,
 				55B6C4DD23E00BF000EA22DF /* SignInViewController.swift in Sources */,
 				55F71EF323ECB3B7006D3EC0 /* Coordinates.swift in Sources */,
+				55808CFE2404583800CB8FFB /* RatingViewController.swift in Sources */,
 				5532048E23ED107900EC869B /* Profile.swift in Sources */,
 				5550A0BE23E33AF400AD4034 /* TaskCell.swift in Sources */,
 				55B6C4DF23E0227200EA22DF /* ProfileViewController.swift in Sources */,
@@ -363,6 +374,7 @@
 				55EBDEB623EBFC2000907856 /* Database.swift in Sources */,
 				555ACAB923EC9CFD000EF3AC /* DateTime.swift in Sources */,
 				5578E6C32402383100459D6A /* GPS.swift in Sources */,
+				55808CFC240455DD00CB8FFB /* PlaceCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
