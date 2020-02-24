@@ -79,7 +79,20 @@ class Database {
     }
     
     func incrementTasksCreated(uid: String) {
-        //
+        let docRef = db.collection("model").document(uid)
+        
+        docRef.getDocument(completion: { (doc, err) in
+            if let doc = doc, doc.exists {
+                let tasksCreated: Int = doc.get("tasksCreated") as! Int
+                docRef.setData([
+                    "tasksCreated": tasksCreated + 1
+                ], merge: true) { err in
+                    if let err = err {
+                        print("Error incremeenting tasks created: \(err)")
+                    }
+                }
+            }
+        })
     }
     
     
@@ -95,20 +108,22 @@ class Database {
             "dueDate": parseDTM_toObj(todo.dueDate),
             "category": todo.category,
             "subject": todo.subject,
-            "priority": todo.priority,
-            "predictedDuration": todo.predictedDuration,
-            "totalBreaks": todo.totalBreaks,
-            "breakDuration": todo.breakDuration,
-            "totalDistractions": todo.totalDistractions,
-            "startBy": parseDTM_toObj(todo.startBy),
-            "tempRange": todo.tempRange,
-            "prefPlaces": parseCoordsArrayToObj(todo.prefPlaces),
+            "rawPriority": todo.rawPriority,
+            "priority": todo.priority!,
+            "predictedDuration": todo.predictedDuration!,
+            "startBy": parseDTM_toObj(todo.startBy!),
+            "totalBreaks": todo.totalBreaks!,
+            "breakDuration": todo.breakDuration!,
+            "totalDistractions": todo.totalDistractions!,
+            "averageTemp": todo.averageTemp!,
+            "prefPlaces": parseCoordsArrayToObj(todo.prefPlaces!),
         ]) { err in
             if let err = err {
                 completion(nil, err)
             } else {
-                // TODO: get todo from ref
-                completion(nil, nil)
+                var newTodo = todo
+                newTodo.tid = ref?.documentID
+                completion(newTodo, nil)
             }
         }
     }
@@ -142,22 +157,29 @@ class Database {
             let date = parseObjToDTM(data["dueDate"] as! [String : Any])
             let category = data["category"] as! String
             let subject = data["subject"] as! String
+            let rawPriority = data["rawPriority"] as! Int
             let priority = data["priority"] as! Int
             let duration = data["predictedDuration"] as! Int
+            let startBy = parseObjToDTM(data["startBy"] as! [String : Any])
             let breaks = data["totalBreaks"] as! Int
             let breakDuration = data["breakDuration"] as! Int
             let distractions = data["totalDistractions"] as! Int
-            let startBy = parseObjToDTM(data["startBy"] as! [String : Any])
-            let tempRange = data["tempRange"] as! [String : Double]
+            let temp = data["averageTemp"] as! Double
             let places = parseObjToCoordsArray(data["prefPlaces"] as! [[String : Double]])
+            
+            var pauseTime: DTM? = nil
+            if let ptime = data["pauseTime"] {
+                pauseTime = parseObjToDTM(ptime as! [String : Any])
+            }
             
             let todo = Todo(tid: tid, title: title, dueDate: date,
                             category: category, subject: subject,
-                            priority: priority, predictedDuration: duration,
-                            totalBreaks: breaks, breakDuration: breakDuration,
-                            totalDistractions: distractions, startBy: startBy,
-                            tempRange: tempRange, prefPlaces: places)
-            
+                            rawPriority: rawPriority, priority: priority,
+                            predictedDuration: duration, startBy: startBy,
+                            pauseTime: pauseTime, totalBreaks: breaks,
+                            breakDuration: breakDuration,
+                            totalDistractions: distractions,
+                            averageTemp: temp, prefPlaces: places)
             todos.append(todo)
         }
         

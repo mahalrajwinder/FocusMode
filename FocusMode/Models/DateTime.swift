@@ -31,6 +31,18 @@ struct DT {
     }
 }
 
+extension DT: Comparable {
+    static func < (lhs: DT, rhs: DT) -> Bool {
+        if lhs.year != rhs.year {
+            return lhs.year < rhs.year
+        } else if lhs.month != rhs.month {
+            return lhs.month < rhs.month
+        } else {
+            return lhs.day < rhs.day
+        }
+    }
+}
+
 // MARK: - Time
 
 struct TM {
@@ -51,6 +63,18 @@ struct TM {
         self.hour = hour
         self.minute = minute
         self.amPm = amPm
+    }
+}
+
+extension TM: Comparable {
+    static func < (lhs: TM, rhs: TM) -> Bool {
+        if lhs.amPm != rhs.amPm {
+            return lhs.amPm == "AM"
+        } else if lhs.hour != rhs.hour {
+            return lhs.hour < rhs.hour
+        } else {
+            return lhs.minute < rhs.minute
+        }
     }
 }
 
@@ -87,6 +111,24 @@ struct DTM {
     }
 }
 
+extension DTM: Comparable {
+    static func < (lhs: DTM, rhs: DTM) -> Bool {
+        if lhs.year != rhs.year {
+            return lhs.year < rhs.year
+        } else if lhs.month != rhs.month {
+            return lhs.month < rhs.month
+        } else if lhs.day != rhs.day {
+            return lhs.day < rhs.day
+        } else if lhs.amPm != rhs.amPm {
+            return lhs.amPm == "AM"
+        } else if lhs.hour != rhs.hour {
+            return lhs.hour < rhs.hour
+        } else {
+            return lhs.minute < rhs.minute
+        }
+    }
+}
+
 // MARK: - Private Functions
 
 private func dateStr(_ datePicker: UIDatePicker) -> String {
@@ -107,7 +149,6 @@ private func parseDate(_ dateStr: String) -> DT {
 }
 
 private func parseTime(_ dateStr: String) -> TM {
-    print(dateStr)
     var timeArr = dateStr.components(separatedBy: " ")
     var amPm: String
     

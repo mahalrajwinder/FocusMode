@@ -28,9 +28,11 @@
 		55B6C4DD23E00BF000EA22DF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B6C4DC23E00BF000EA22DF /* SignInViewController.swift */; };
 		55B6C4DF23E0227200EA22DF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B6C4DE23E0227200EA22DF /* ProfileViewController.swift */; };
 		55B7895823DFDB0800C7E2BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55B7895723DFDB0800C7E2BB /* GoogleService-Info.plist */; };
+		55CDA66524033657006E80C0 /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CDA66424033657006E80C0 /* Places.swift */; };
 		55D4B8D423EBD09600914112 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D4B8D323EBD09600914112 /* Weather.swift */; };
 		55D4B8D923EBD97B00914112 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D4B8D823EBD97B00914112 /* Constants.swift */; };
 		55EBDEB623EBFC2000907856 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EBDEB523EBFC2000907856 /* Database.swift */; };
+		55EC12D5240320E5001DEFC7 /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC12D4240320E5001DEFC7 /* PlacesTableViewController.swift */; };
 		55F71EEF23ECB056006D3EC0 /* Prediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F71EEE23ECB056006D3EC0 /* Prediction.swift */; };
 		55F71EF323ECB3B7006D3EC0 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F71EF223ECB3B7006D3EC0 /* Coordinates.swift */; };
 /* End PBXBuildFile section */
@@ -60,9 +62,11 @@
 		55B6C4DC23E00BF000EA22DF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		55B6C4DE23E0227200EA22DF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		55B7895723DFDB0800C7E2BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		55CDA66424033657006E80C0 /* Places.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
 		55D4B8D323EBD09600914112 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		55D4B8D823EBD97B00914112 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		55EBDEB523EBFC2000907856 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		55EC12D4240320E5001DEFC7 /* PlacesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
 		55F71EEE23ECB056006D3EC0 /* Prediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prediction.swift; sourceTree = "<group>"; };
 		55F71EF223ECB3B7006D3EC0 /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
 		D5BDD30C26C91F6F51C128A5 /* Pods-FocusMode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusMode.debug.xcconfig"; path = "Target Support Files/Pods-FocusMode/Pods-FocusMode.debug.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 				5550A0BA23E33A2400AD4034 /* TaskTableViewController.swift */,
 				558AF88123E33C0B00940DEA /* TaskDetailsViewController.swift */,
 				5592CB6923E7FC7B002B313C /* TaskBeginViewController.swift */,
+				55EC12D4240320E5001DEFC7 /* PlacesTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 				55F71EEE23ECB056006D3EC0 /* Prediction.swift */,
 				557C8B4523ECF5CF00B1B2D2 /* AuthListener.swift */,
 				5578E6C22402383100459D6A /* GPS.swift */,
+				55CDA66424033657006E80C0 /* Places.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -311,6 +317,7 @@
 				55B6C4DB23E00BCE00EA22DF /* SignUpViewController.swift in Sources */,
 				550D313A23DE3ED800927EA9 /* AppDelegate.swift in Sources */,
 				550D313C23DE3ED800927EA9 /* SceneDelegate.swift in Sources */,
+				55EC12D5240320E5001DEFC7 /* PlacesTableViewController.swift in Sources */,
 				55B6C4DD23E00BF000EA22DF /* SignInViewController.swift in Sources */,
 				55F71EF323ECB3B7006D3EC0 /* Coordinates.swift in Sources */,
 				5532048E23ED107900EC869B /* Profile.swift in Sources */,
@@ -319,6 +326,7 @@
 				557C8B4623ECF5CF00B1B2D2 /* AuthListener.swift in Sources */,
 				55F71EEF23ECB056006D3EC0 /* Prediction.swift in Sources */,
 				55A196A423DFA8760034A256 /* Task.swift in Sources */,
+				55CDA66524033657006E80C0 /* Places.swift in Sources */,
 				5592CB6A23E7FC7B002B313C /* TaskBeginViewController.swift in Sources */,
 				558AF88223E33C0B00940DEA /* TaskDetailsViewController.swift in Sources */,
 				550D314423DE3ED800927EA9 /* FocusMode.xcdatamodeld in Sources */,

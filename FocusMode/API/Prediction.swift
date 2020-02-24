@@ -6,23 +6,15 @@
 //
 
 
-func getInitialPredictions(title: String,
-                           due: DTM,
-                           category: String,
-                           subject: String,
-                           rawPriority: Int) -> [String: Any] {
+func getInitialPredictions(todo: Todo,
+                           completion: @escaping (Todo?, Error?) -> Void) {
     //
+    var ltodo = todo
+    ltodo.priority = 0
+    ltodo.predictedDuration = 0
+    ltodo.startBy = DTM(20, 12, 22, 0, 0, "AM")
+    ltodo.averageTemp = 0.0
+    ltodo.prefPlaces = [Coords(0.0, 0.0)]
     
-    return [
-        "priority": 0,
-        "predictedDuration": 0,
-        "startBy": DTM(0,0,0,0,0,"AM"),
-        "tempRange": [
-            "min": 0.0,
-            "max": 0.0,
-        ],
-        "prefPlaces": [
-            Coords(0.0, 0.0),
-        ],
-    ]
+    completion(ltodo, nil)
 }

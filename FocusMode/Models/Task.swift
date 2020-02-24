@@ -8,37 +8,38 @@
 import Foundation
 
 struct Todo {
-    let tid: String?
+    var tid: String?
     let title: String
     let dueDate: DTM
     let category: String
     let subject: String
-    let priority: Int
-    let predictedDuration: Int // in minutes
-    var totalBreaks: Int
-    var breakDuration: Int // in minutes
-    var totalDistractions: Int
-    var startBy: DTM
-    var tempRange: [String : Double]
-    var prefPlaces: [Coords]
+    let rawPriority: Int
+    var priority: Int? = nil
+    var predictedDuration: Int? = nil // in minutes
+    var startBy: DTM? = nil
+    var pauseTime: DTM? = nil
+    var totalBreaks: Int? = 0
+    var breakDuration: Int? = 0 // in minutes
+    var totalDistractions: Int? = 0
+    var averageTemp: Double? = nil
+    var prefPlaces: [Coords]? = nil
 }
 
-//struct DoneTask {
-//    let tid: String
-//    let title: String
-//    let dueDate: String
-//    let category: String
-//    let subject: String
-//    let priority: Double
-//    let predictedDuration: Double? = nil
-//    var observedDuration: Double? = nil
-//    var totalBreaks: Int? = 0
-//    var breakDuration: Double? = 0.0
-//    var totalDistractions: Int? = 0
-//    var start: String? = nil
-//    var end: String? = nil
-//    var status: Int? = 0
-//    var ratings: Double? = nil
-//    var temperature: Double? = nil
-//    var location: Double? = nil
-//}
+struct DoneTask {
+    let tid: String
+    let title: String
+    let dueDate: String
+    let category: String
+    let subject: String
+    let rawPriority: Int
+    let priority: Int
+    let observedDuration: Int
+    let totalBreaks: Int
+    let breakDuration: Int // in minutes
+    let totalDistractions: Int
+    let finishedAt: DTM
+    let ratings: Double
+    let status: Int // 1 = finished, 0 = not finished
+    let averageTemp: Double
+    let mostWorkedPlace: Coords // place where most of the task was completed
+}

@@ -45,15 +45,22 @@ class TaskDetailsViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     @IBAction func didTapDone(_ sender: Any) {
         let uid = UserDefaults.standard.string(forKey: "uid")!
-        let todo = getTodo()
         
-        self.db.addTodo(uid: uid, todo: todo, completion: { (todo, err) in
+        getTodo(completion: { (todo, err) in
             if let err = err {
-                print("Error adding document: \(err)")
+                print("Error getting todo: \(err)")
             } else {
-                self.notifyChange()
-                self.db.incrementTasksCreated(uid: uid)
-                self.dismiss(animated: true)
+                // [START saving todo in the database]
+                self.db.addTodo(uid: uid, todo: todo!, completion: { (todo, err) in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        self.notifyChange(todo!)
+                        self.db.incrementTasksCreated(uid: uid)
+                        self.dismiss(animated: true)
+                    }
+                })
+                // [END saving todo in the database]
             }
         })
     }
@@ -88,35 +95,29 @@ class TaskDetailsViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     // MARK: - Private Methods
     
-    private func getTodo() -> Todo {
+    private func getTodo(completion: @escaping (Todo?, Error?) -> Void) {
         let title = titleTextView.text!
         let date = DTM(dueDatePicker)
         let category = CATEGORY_PICKER_DATA[categoryPicker.selectedRow(inComponent: 0)]
         let subject = SUBJECT_PICKER_DATA[subjectPicker.selectedRow(inComponent: 0)]
         let rawPriority = 2 - priorityPicker.selectedSegmentIndex
         
-        let predictedData = getInitialPredictions(title: title,
-                                                  due: date,
-                                                  category: category,
-                                                  subject: subject,
-                                                  rawPriority: rawPriority)
+        let todo = Todo(tid: nil, title: title, dueDate: date,
+                        category: category, subject: subject,
+                        rawPriority: rawPriority)
         
-        let priority = predictedData["priority"] as! Int
-        let duration = predictedData["predictedDuration"] as! Int
-        let startBy = predictedData["startBy"] as! DTM
-        let tempRange = predictedData["tempRange"] as! [String: Double]
-        let prefPlaces = predictedData["prefPlaces"] as! [Coords]
-        
-        return Todo(tid: nil, title: title, dueDate: date, category: category,
-                    subject: subject, priority: priority,
-                    predictedDuration: duration, totalBreaks: 0,
-                    breakDuration: 0, totalDistractions: 0, startBy: startBy,
-                    tempRange: tempRange, prefPlaces: prefPlaces)
+        getInitialPredictions(todo: todo, completion: { (todo, err) in
+            if let err = err {
+                completion(nil, err)
+            } else {
+                completion(todo, nil)
+            }
+        })
     }
     
-    private func notifyChange() {
+    private func notifyChange(_ todo: Todo) {
         // Send notification to reload task table view controller
-        //let nc = NotificationCenter.default
-        //nc.post(name: NSNotification.Name("newTask"), object: nil, userInfo: ["task": task])
+        let nc = NotificationCenter.default
+        nc.post(name: NSNotification.Name("newTodo"), object: nil, userInfo: ["newTodo": todo])
     }
 }

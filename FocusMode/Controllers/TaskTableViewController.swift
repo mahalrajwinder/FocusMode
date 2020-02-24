@@ -31,7 +31,7 @@ class TaskTableViewController: UITableViewController {
         
         // Observer for handling new task
         let nc = NotificationCenter.default
-        nc.addObserver(self, selector:#selector(reloadWithNewTask), name: NSNotification.Name ("newTask"), object: nil)
+        nc.addObserver(self, selector:#selector(reloadWithNewTodo), name: NSNotification.Name ("newTodo"), object: nil)
     }
     
     func loadTodos() {
@@ -41,15 +41,16 @@ class TaskTableViewController: UITableViewController {
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-                self.tasks = todos!
+                self.tasks = todos!.sorted(by: { $0.dueDate < $1.dueDate })
                 self.tableView.reloadData()
             }
         })
     }
     
-    @objc func reloadWithNewTask(_ notification: Notification) {
-        let task = notification.userInfo?["task"] as! Todo
-        self.tasks.append(task)
+    @objc func reloadWithNewTodo(_ notification: Notification) {
+        let todo = notification.userInfo?["newTodo"] as! Todo
+        self.tasks.append(todo)
+        self.tasks.sort(by: { $0.dueDate < $1.dueDate })
         self.tableView.reloadData()
     }
 
