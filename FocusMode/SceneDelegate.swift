@@ -22,6 +22,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Get the currently signed-in user
         // If not null, bypass WelcomeViewController and make TabBarController as the initial view
         if Auth.auth().currentUser != nil {
+            if UserDefaults.standard.string(forKey: "uid") == nil {
+                return
+            }
             let main = UIStoryboard(name: "Main", bundle: nil)
             let  tabBarController = main.instantiateViewController(withIdentifier: "TabBarController")
             self.window?.rootViewController = tabBarController

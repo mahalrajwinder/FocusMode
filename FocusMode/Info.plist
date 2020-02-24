@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSHealthShareUsageDescription</key>
-	<string>Share health data</string>
-	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>We will use this to find your neighborhood users</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -24,6 +20,16 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>We will use this to find your neighborhood users</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Share health data</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>We will use this to find your neighborhood users</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We will use this to personalize your experience</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We will use this to personalize your experience</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -48,19 +54,11 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
+	<array/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We will use this to personalize your experience</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We will use this to personalize your experience</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>We will use this to find your neighborhood users</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

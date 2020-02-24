@@ -2,28 +2,51 @@
 //  PlacesTableViewController.swift
 //  FocusMode
 //
-//  Created by Rajwinder on 2/23/20.
 //  Copyright © 2020 Rajwinder Singh. All rights reserved.
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
-class PlacesTableViewController: UITableViewController, UISearchResultsUpdating {
+class PlacesTableViewController: UITableViewController, UISearchResultsUpdating, CLLocationManagerDelegate {
     
-    let entries = [(title: "Easiest", image: "green_circle"),
-                   (title: "Intermediate", image: "blue_square"),
-                   (title: "Advanced", image: "black_diamond"),
-                   (title: "Expert Only", image: "double_black_diamond")]
+    let locationManager = CLLocationManager()
+    let searchController = UISearchController(searchResultsController: nil)
+    var coords: Coords? = nil
+    var places = [Place]()
     
     // An empty tuple that will be updated with search results.
-    var searchResults : [(title: String, image: String)] = []
-    
-    let searchController = UISearchController(searchResultsController: nil)
+    //var searchResults : [(title: String, image: String)] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // [START location manager setup]
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+            
+            self.coords = Coords((locationManager.location?.coordinate.latitude)!,
+                                 (locationManager.location?.coordinate.longitude)!)
+            
+            getNearByPlaces(coords: self.coords!, completion: { (places, err) in
+                if let err = err {
+                    print("Error getting places: \(err)")
+                } else {
+                    self.places = places!
+                    // do sorting and apply personalization filters here
+                    self.tableView.reloadData()
+                }
+            })
+        }
+        // [END location manager setup]
+                
+        // [START search bar setup]
         searchController.searchResultsUpdater = self
         self.definesPresentationContext = true
         
@@ -32,27 +55,35 @@ class PlacesTableViewController: UITableViewController, UISearchResultsUpdating 
         
         // Don't hide the navigation bar because the search bar is in it.
         searchController.hidesNavigationBarDuringPresentation = false
+        // [END search bar setup]
     }
     
     func filterContent(for searchText: String) {
         // Update the searchResults array with matches
         // in our entries based on the title value.
-        searchResults = entries.filter({ (title: String, image: String) -> Bool in
-            let match = title.range(of: searchText, options: .caseInsensitive)
-            // Return the tuple if the range contains a match.
-            return match != nil
-        })
+//        searchResults = entries.filter({ (title: String, image: String) -> Bool in
+//            let match = title.range(of: searchText, options: .caseInsensitive)
+//            // Return the tuple if the range contains a match.
+//            return match != nil
+//        })
     }
+    
+    // MARK: - Location Manager method
+    
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+//        print("locations = \(locValue.latitude) \(locValue.longitude)")
+//    }
     
     // MARK: - UISearchResultsUpdating method
     
     func updateSearchResults(for searchController: UISearchController) {
         // If the search bar contains text, filter our data with the string
-        if let searchText = searchController.searchBar.text {
-            filterContent(for: searchText)
-            // Reload the table view with the search result data.
-            tableView.reloadData()
-        }
+//        if let searchText = searchController.searchBar.text {
+//            filterContent(for: searchText)
+//            // Reload the table view with the search result data.
+//            tableView.reloadData()
+//        }
     }
     
     // MARK: - Table view data source
@@ -64,14 +95,15 @@ class PlacesTableViewController: UITableViewController, UISearchResultsUpdating 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // If the search bar is active, use the searchResults data.
         //return searchController.isActive ? searchResults.count : entries.count
-        return 0
+        return places.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "placeCell", for: indexPath) as! PlaceTableViewCell
+        
+        let place = places[indexPath.row]
+        cell.nameLabel.text = place.name
+        cell.ratingLabel.text = "Rating: \(place.rating)"
 
         return cell
         
@@ -84,7 +116,6 @@ class PlacesTableViewController: UITableViewController, UISearchResultsUpdating 
 //        cell.imageView?.image = UIImage(named: entry.image)
 //        return cell
     }
-    */
 
     /*
     // MARK: - Navigation
