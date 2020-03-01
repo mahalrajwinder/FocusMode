@@ -36,7 +36,7 @@ class SeeAllTableViewController: UITableViewController {
         
         let place = places[indexPath.row]
         cell.nameLabel.text = place.name
-        cell.ratingLabel.text = "Rating: \(place.rating)"
+        cell.ratingLabel.text = "Rating: \(place.getRating())"
 
         return cell
     }

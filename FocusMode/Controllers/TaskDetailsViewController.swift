@@ -97,14 +97,15 @@ class TaskDetailsViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     private func getTodo(completion: @escaping (Todo?, Error?) -> Void) {
         let title = titleTextView.text!
-        let date = DTM(dueDatePicker)
+        let date = Date(dueDatePicker)
         let category = CATEGORY_PICKER_DATA[categoryPicker.selectedRow(inComponent: 0)]
         let subject = SUBJECT_PICKER_DATA[subjectPicker.selectedRow(inComponent: 0)]
         let rawPriority = 2 - priorityPicker.selectedSegmentIndex
         
-        let todo = Todo(tid: nil, title: title, dueDate: date,
-                        category: category, subject: subject,
-                        rawPriority: rawPriority)
+        let todo = Todo(tid: nil, title: title, due: date, category: category,
+                        subject: subject, rawPriority: rawPriority, priority: nil,
+                        duration: nil, startBy: nil, pauseTime: nil, breaks: nil,
+                        timeLag: nil, distractions: nil, prefPlaces: nil)
         
         getInitialPredictions(todo: todo, completion: { (todo, err) in
             if let err = err {

@@ -13,8 +13,8 @@ class PlacesTableViewController: UITableViewController, UISearchResultsUpdating,
     
     let locationManager = CLLocationManager()
     let searchController = UISearchController(searchResultsController: nil)
-    var coords: Coords? = nil
-    var places = [Place]()
+    var coords: Location? = nil
+    var places = [PlaceShort]()
     
     // An empty tuple that will be updated with search results.
     //var searchResults : [(title: String, image: String)] = []
@@ -31,8 +31,8 @@ class PlacesTableViewController: UITableViewController, UISearchResultsUpdating,
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
             
-            self.coords = Coords((locationManager.location?.coordinate.latitude)!,
-                                 (locationManager.location?.coordinate.longitude)!)
+            self.coords = Location((locationManager.location?.coordinate.latitude)!,
+                                   (locationManager.location?.coordinate.longitude)!)
             
             getNearByPlaces(coords: self.coords!, completion: { (places, err) in
                 if let err = err {

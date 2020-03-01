@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import CoreMotion
 
 class TaskBeginViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -17,7 +18,8 @@ class TaskBeginViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var startPauseBtn: UIButton!
     
     let locationManager = CLLocationManager()
-    var coords: Coords? = nil
+    let motionManager = CMMotionManager()
+    var coords: Location? = nil
     var places = [Place]()
     var timer:Timer?
     var timeLeft = 0
@@ -39,18 +41,19 @@ class TaskBeginViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
             
-            self.coords = Coords((locationManager.location?.coordinate.latitude)!,
-            (locationManager.location?.coordinate.longitude)!)
+            self.coords = Location((locationManager.location?.coordinate.latitude)!,
+                                   (locationManager.location?.coordinate.longitude)!)
             
             getNearByPlaces(coords: self.coords!, completion: { (places, err) in
                 if let err = err {
                     print("Error getting places: \(err)")
                 } else {
-                    self.places = places!
+                    // Sort places before converting to Place
+                    //self.places = places!
                     // do sorting and apply personalization filters here
-                    let place = self.places[0]
-                    self.placeNameLabel.text = place.name
-                    self.placeRatingLabel.text = "Rating: \(place.rating)"
+                    //let place = self.places[0]
+                    //self.placeNameLabel.text = place.name
+                    //self.placeRatingLabel.text = "Rating: \(place.rating)"
                 }
             })
         }

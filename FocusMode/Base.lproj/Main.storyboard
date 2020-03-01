@@ -758,7 +758,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="qWg-WE-vPE">
-                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="vK4-aA-P1l">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="vK4-aA-P1l">
                             <connections>
                                 <action selector="didTapCancel:" destination="Wbw-2X-BOF" id="VvF-9O-eMp"/>
                             </connections>

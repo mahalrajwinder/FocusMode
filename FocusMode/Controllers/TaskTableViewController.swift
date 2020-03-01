@@ -45,7 +45,7 @@ class TaskTableViewController: UITableViewController {
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-                self.tasks = todos!.sorted(by: { $0.dueDate < $1.dueDate })
+                self.tasks = todos!.sorted(by: { $0.due.isEarlier(from: $1.due) })
                 self.tableView.reloadData()
             }
         })
@@ -61,13 +61,14 @@ class TaskTableViewController: UITableViewController {
         }
         let uid = UserDefaults.standard.string(forKey: "uid")!
         db.markTodoDone(uid: uid, todo: todo)
+        db.incrementTasksCompleted(uid: uid)
         self.tableView.reloadData()
     }
     
     @objc func reloadWithNewTodo(_ notification: Notification) {
         let todo = notification.userInfo?["newTodo"] as! Todo
         self.tasks.append(todo)
-        self.tasks.sort(by: { $0.dueDate < $1.dueDate })
+        self.tasks.sort(by: { $0.due.isEarlier(from: $1.due) })
         self.tableView.reloadData()
     }
 
@@ -86,7 +87,7 @@ class TaskTableViewController: UITableViewController {
         
         let task = tasks[indexPath.row]
         cell.titleLabel.text = task.title
-        cell.dateLabel.text = parseDTM_toStr(task.dueDate)
+        cell.dateLabel.text = task.due.toString()
         
         return cell
     }
@@ -107,14 +108,5 @@ class TaskTableViewController: UITableViewController {
             // De-selects the selected task cell
             tableView.deselectRow(at: indexPath, animated: true)
         }
-    }
-    
-    // MARK: - Private Methods
-    
-    private func parseDTM_toStr(_ dtm: DTM) -> String {
-        let str = String(format: "%02d/%02d/%02d, %02d:%02d ",
-                         dtm.month, dtm.day, dtm.year,
-                         dtm.hour, dtm.minute)
-        return str + dtm.amPm
     }
 }

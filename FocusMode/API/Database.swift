@@ -23,24 +23,8 @@ class Database {
     
     func createProfile(profile: Profile,
                        completion: @escaping (Error?) -> Void) {
-        let bedtime = parseTM_toObj(profile.bedtime)
-        let address = parseCoordsToObj(profile.address)
-                
-        self.db.collection("profile").document(profile.uid).setData([
-            "name": profile.name,
-            "age": profile.age,
-            "gender": profile.gender,
-            "height": profile.height,
-            "weight": profile.weight,
-            "timePreference": profile.timePreference,
-            "bedtime": bedtime,
-            "major": profile.major,
-            "dailyGoal": profile.dailyGoal,
-            "successRate": profile.successRate,
-            "handlingPrioritiesRate": profile.handlingPrioritiesRate,
-            "hardworkingRate": profile.hardworkingRate,
-            "address": address
-        ]) { err in
+        
+        self.db.collection("profile").document(profile.uid).setData(profile.toDict()) { err in
             if let err = err {
                 completion(err)
             } else {
@@ -51,27 +35,26 @@ class Database {
     
     func createUserModel(profile: Profile,
                        completion: @escaping (Error?) -> Void) {
-        // Get similar user data
-        let places = parseCoordsArrayToObj([Coords(0.0, 0.0)])
-        let tempRange = ["min": 0.0, "max": 0.0]
+        //
+        // Create one task of each subject and category for the new user
+        // using data from similar users (and taking their averages).
+        //
+        // Create a temp/uid document with at least 10 places from
+        // similar users to recommend places if there is not enough data in
+        // user logs.
+        
 //        HealthKitManager().getTodaysSteps(completion: { (steps) in
 //            print("Steps: \(steps)")
 //        })
+        
+        let temp = ["temperatures": 70, "count": 1]
+        
         self.db.collection("model").document(profile.uid).setData([
             "tasksCreated": 0,
             "tasksCompleted": 0,
             "daysIndex": DAYS_INDEX,
-            "mostVisitedPlaces": places,
-            "averageDistractions": 0,
-            "averageBreakDuration": 0,
-            "averageTaskDuration": 0,
-            "mostFrequentSubject": "CS",
-            "mostFrequentCategory": "HW",
-            "mostMissedDeadlinesSubject": "CS",
-            "mostMissedDeadlinesCategory": "HW",
             "activity": 0,
-            "tempRange": tempRange,
-            "avgSteps": 0
+            "tempRange": temp,
         ]) { err in
             if let err = err {
                 completion(err)
@@ -82,7 +65,7 @@ class Database {
     }
     
     func incrementTasksCreated(uid: String) {
-        let docRef = db.collection("model").document(uid)
+        let docRef = self.db.collection("model").document(uid)
         
         docRef.getDocument(completion: { (doc, err) in
             if let doc = doc, doc.exists {
@@ -98,6 +81,39 @@ class Database {
         })
     }
     
+    func incrementTasksCompleted(uid: String) {
+        let docRef = self.db.collection("model").document(uid)
+        
+        docRef.getDocument(completion: { (doc, err) in
+            if let doc = doc, doc.exists {
+                let tasksCompleted: Int = doc.get("tasksCompleted") as! Int
+                docRef.setData([
+                    "tasksCompleted": tasksCompleted + 1
+                ], merge: true) { err in
+                    if let err = err {
+                        print("Error incremeenting tasks completed: \(err)")
+                    }
+                }
+            }
+        })
+    }
+    
+    // MARK: - Place
+    
+    func addPlace() {
+        let uid = UserDefaults.standard.string(forKey: "uid")!
+        let location = Location(33.64582920000001, -117.8468481)
+        let place = Place("Science Library", location, "ChIJlYc2bhHe3IAR2uGqbK_4Gxc",
+                          "library", 4.6, "CS_or_Engineering", "Project", 130, 15)
+        
+        self.db.collection("places").document(uid).setData([
+            "\(place.placeID)": place.toDict()
+        ], merge: true) { err in
+            if let err = err {
+                print(err)
+            }
+        }
+    }
     
     // MARK: - Todos
     
@@ -106,26 +122,12 @@ class Database {
                  completion: @escaping (Todo?, Error?) -> Void) {
         var ref: DocumentReference? = nil
         ref = self.db.collection("tasks").document(uid)
-        ref = ref?.collection("todo").addDocument(data: [
-            "title": todo.title,
-            "dueDate": parseDTM_toObj(todo.dueDate),
-            "category": todo.category,
-            "subject": todo.subject,
-            "rawPriority": todo.rawPriority,
-            "priority": todo.priority!,
-            "predictedDuration": todo.predictedDuration!,
-            "startBy": parseDTM_toObj(todo.startBy!),
-            "totalBreaks": todo.totalBreaks!,
-            "breakDuration": todo.breakDuration!,
-            "totalDistractions": todo.totalDistractions!,
-            "averageTemp": todo.averageTemp!,
-            "prefPlaces": parseCoordsArrayToObj(todo.prefPlaces!),
-        ]) { err in
+        ref = ref?.collection("todo").addDocument(data: todo.toDict()) { err in
             if let err = err {
                 completion(nil, err)
             } else {
                 var newTodo = todo
-                newTodo.tid = ref?.documentID
+                newTodo.tid = ref!.documentID
                 completion(newTodo, nil)
             }
         }
@@ -134,19 +136,47 @@ class Database {
     func markTodoDone(uid: String, todo: Todo) {
         let tasksRef = self.db.collection("tasks").document(uid)
         
-        tasksRef.collection("done").document(todo.tid!).setData([
-            "title": todo.title
-        ], merge: true) { err in
-            if let err = err {
-                print("Error marking todo done: \(err)")
+        // [START Adding task to done collection]
+        let status = 1
+        let overdue = -30
+        let rating = 7.5
+        let duration = 60
+        let timeLag = 70
+        let distractions = 12
+        let breaks = 4
+        
+        let key = "\(todo.subject),\(todo.category)"
+        let docRef = tasksRef.collection("done").document(key)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                var done = Done(key, document.data()!)
+                done.log(todo.rawPriority, duration, timeLag,
+                         distractions, breaks, rating, status, overdue)
+                docRef.setData(done.toDict(), merge: true) { err in
+                    if let err = err {
+                        print("Error marking task done: \(err)")
+                    }
+                }
+            } else {
+                let done = Done(todo.subject, todo.category, todo.rawPriority,
+                                duration, timeLag, distractions, breaks,
+                                rating, status, overdue)
+                docRef.setData(done.toDict()) { err in
+                    if let err = err {
+                        print("Error marking task done: \(err)")
+                    }
+                }
             }
         }
+        // [END Adding task to done collection]
         
-        tasksRef.collection("todo").document(todo.tid!).delete() { err in
+        // [START deleting task from todo collection]
+        tasksRef.collection("todo").document(todo.tid).delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")
             }
         }
+        // [END deleting task from todo collection]
     }
     
     func getTodos(uid: String,
@@ -169,142 +199,11 @@ class Database {
     
     private func getTodoArray(querySnapshot: QuerySnapshot) -> [Todo] {
         var todos = [Todo]()
-        var data: [String: Any]
         
         for doc in querySnapshot.documents {
-            data = doc.data()
-            let tid = doc.documentID
-            let title = data["title"] as! String
-            let date = parseObjToDTM(data["dueDate"] as! [String : Any])
-            let category = data["category"] as! String
-            let subject = data["subject"] as! String
-            let rawPriority = data["rawPriority"] as! Int
-            let priority = data["priority"] as! Int
-            let duration = data["predictedDuration"] as! Int
-            let startBy = parseObjToDTM(data["startBy"] as! [String : Any])
-            let breaks = data["totalBreaks"] as! Int
-            let breakDuration = data["breakDuration"] as! Int
-            let distractions = data["totalDistractions"] as! Int
-            let temp = data["averageTemp"] as! Double
-            let places = parseObjToCoordsArray(data["prefPlaces"] as! [[String : Double]])
-            
-            var pauseTime: DTM? = nil
-            if let ptime = data["pauseTime"] {
-                pauseTime = parseObjToDTM(ptime as! [String : Any])
-            }
-            
-            var trackedTemp: [Double]? = nil
-            if let tTemp = data["trackedTemp"] {
-                trackedTemp = tTemp as? [Double]
-            }
-            
-            var trackedPlaces: [[String: Any]]? = nil
-            if let tPlaces = data["trackedPlaces"] {
-                trackedPlaces = tPlaces as? [[String: Any]]
-            }
-            
-            let todo = Todo(tid: tid, title: title, dueDate: date,
-                            category: category, subject: subject,
-                            rawPriority: rawPriority, priority: priority,
-                            predictedDuration: duration, startBy: startBy,
-                            pauseTime: pauseTime, totalBreaks: breaks,
-                            breakDuration: breakDuration,
-                            totalDistractions: distractions,
-                            averageTemp: temp, prefPlaces: places,
-                            trackedTemp: trackedTemp, trackedPlaces: trackedPlaces)
+            let todo = Todo(doc.documentID, doc.data())
             todos.append(todo)
         }
-        
         return todos
-    }
-    
-    private func parseCoordsArrayToObj(_ coordsArr: [Coords]) -> [[String: Double]] {
-        var objArr = [[String: Double]]()
-        
-        for coords in coordsArr {
-            let obj = parseCoordsToObj(coords)
-            objArr.append(obj)
-        }
-        
-        return objArr
-    }
-    
-    private func parseObjToCoordsArray(_ obj: [[String: Double]]) -> [Coords] {
-        var coordsArr = [Coords]()
-        
-        for o in obj {
-            let coords = parseObjToCoords(o)
-            coordsArr.append(coords)
-        }
-        
-        return coordsArr
-    }
-    
-    private func parseCoordsToObj(_ coords: Coords) -> [String: Double] {
-        return [
-            "lat": coords.lat,
-            "long": coords.long,
-        ]
-    }
-    
-    private func parseObjToCoords(_ obj: [String: Double]) -> Coords {
-        let lat = obj["lat"]!
-        let long = obj["long"]!
-        
-        return Coords(lat, long)
-    }
-    
-    private func parseTM_toObj(_ tm: TM) -> [String: Any] {
-        return [
-            "hour": tm.hour,
-            "minute": tm.minute,
-            "amPm": tm.amPm,
-        ]
-    }
-    
-    private func parseDT_toObj(_ dt: DT) -> [String: Int] {
-        return [
-            "year": dt.year,
-            "month": dt.month,
-            "day": dt.day,
-        ]
-    }
-    
-    private func parseDTM_toObj(_ dtm: DTM) -> [String: Any] {
-        return [
-            "year": dtm.year,
-            "month": dtm.month,
-            "day": dtm.day,
-            "hour": dtm.hour,
-            "minute": dtm.minute,
-            "amPm": dtm.amPm,
-        ]
-    }
-    
-    private func parseObjToTM(_ tm: [String: Any]) -> TM {
-        let h = tm["hour"] as! Int
-        let m = tm["minute"] as! Int
-        let amPm = tm["amPm"] as! String
-        
-        return TM(h, m, amPm)
-    }
-    
-    private func parseObjToDT(_ dt: [String: Int]) -> DT {
-        let y = dt["year"]!
-        let m = dt["month"]!
-        let d = dt["day"]!
-        
-        return DT(y, m, d)
-    }
-    
-    private func parseObjToDTM(_ dtm: [String: Any]) -> DTM {
-        let y = dtm["year"] as! Int
-        let m = dtm["month"] as! Int
-        let d = dtm["day"] as! Int
-        let h = dtm["hour"] as! Int
-        let min = dtm["minute"] as! Int
-        let amPm = dtm["amPm"] as! String
-        
-        return DTM(y, m, d, h, min, amPm)
     }
 }

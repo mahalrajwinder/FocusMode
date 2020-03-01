@@ -1,8 +1,4 @@
 //
-//  Constants.swift
-//  FocusMode
-//
-//  Created by Rajwinder on 2/5/20.
 //  Copyright © 2020 Rajwinder Singh. All rights reserved.
 //
 
@@ -28,10 +24,10 @@ let CATEGORY_PICKER_DATA: [String] = [
 let SUBJECT_PICKER_DATA: [String] = [
     "Science",
     "Mathematics",
-    "CS / Engineering",
-    "English / Writing",
+    "CS_or_Engineering",
+    "English_or_Writing",
     "Social Studies",
-    "General / Other",
+    "General_or_Other",
 ]
 
 let DAYS_INDEX: [[String: Any]] = [
@@ -39,63 +35,49 @@ let DAYS_INDEX: [[String: Any]] = [
         "day": "Monday",
         "minutesWorked": 0,
         "count": 0,
-        "totalBreaks": 0,
-        "breakDuration": 0,
-        "totalDistractions": 0,
-        "productivity": 0.0
+        "breaks": 0,
+        "distractions": 0,
     ],
     [
         "day": "Tuesday",
         "minutesWorked": 0,
         "count": 0,
-        "totalBreaks": 0,
-        "breakDuration": 0,
-        "totalDistractions": 0,
-        "productivity": 0.0
+        "breaks": 0,
+        "distractions": 0,
     ],
     [
         "day": "Wednesday",
         "minutesWorked": 0,
         "count": 0,
-        "totalBreaks": 0,
-        "breakDuration": 0,
-        "totalDistractions": 0,
-        "productivity": 0.0
+        "breaks": 0,
+        "distractions": 0,
     ],
     [
         "day": "Thursday",
         "minutesWorked": 0,
         "count": 0,
-        "totalBreaks": 0,
-        "breakDuration": 0,
-        "totalDistractions": 0,
-        "productivity": 0.0
+        "breaks": 0,
+        "distractions": 0,
     ],
     [
         "day": "Firday",
         "minutesWorked": 0,
         "count": 0,
-        "totalBreaks": 0,
-        "breakDuration": 0,
-        "totalDistractions": 0,
-        "productivity": 0.0
+        "breaks": 0,
+        "distractions": 0,
     ],
     [
         "day": "Saturday",
         "minutesWorked": 0,
         "count": 0,
-        "totalBreaks": 0,
-        "breakDuration": 0,
-        "totalDistractions": 0,
-        "productivity": 0.0
+        "breaks": 0,
+        "distractions": 0,
     ],
     [
         "day": "Sunday",
         "minutesWorked": 0,
         "count": 0,
-        "totalBreaks": 0,
-        "breakDuration": 0,
-        "totalDistractions": 0,
-        "productivity": 0.0
+        "breaks": 0,
+        "distractions": 0,
     ],
 ]

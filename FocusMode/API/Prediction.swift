@@ -11,10 +11,9 @@ func getInitialPredictions(todo: Todo,
     //
     var ltodo = todo
     ltodo.priority = 0
-    ltodo.predictedDuration = 0
-    ltodo.startBy = DTM(20, 12, 22, 0, 0, "AM")
-    ltodo.averageTemp = 0.0
-    ltodo.prefPlaces = [Coords(0.0, 0.0)]
+    ltodo.duration = 0
+    ltodo.startBy = 0
+    //ltodo.prefPlaces = [Place]
     
     completion(ltodo, nil)
 }

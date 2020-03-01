@@ -132,19 +132,19 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         let height = Double(heightTextField.text!)!
         let weight = Double(weightTextField.text!)!
         let timePref = timePrefPicker.selectedSegmentIndex == 0 ? "morning" : "night"
-        let bedtime = TM(bedtimePicker)
+        let bedtime = Date(bedtimePicker).toString(dateFormat: "hh:mm a")
         let major = MAJOR_PICKER_DATA[majorPicker.selectedRow(inComponent: 0)]
         let goal = Int(studyGoalPicker.countDownDuration / 60) // in minutes
         let successRate = Double(deadlineMetPicker.value)
         let prioritiesRate = Double(handlingPrioritiesPicker.value)
         let workingRate = Double(hardworkingRatePicker.value)
         
-        getCoordsFromAddress(address: addressTextField.text!, completion: { (coords, err) in
+        getCoordsFromAddress(address: addressTextField.text!, completion: { (location, err) in
             if let err = err {
                 completion(nil, err)
             } else {
                 let profile = Profile(uid: uid, name: name, age: age, gender: gender,
-                                      height: height, weight: weight, address: coords!,
+                                      height: height, weight: weight, address: location!,
                                       major: major, timePreference: timePref, dailyGoal: goal,
                                       bedtime: bedtime, successRate: successRate,
                                       handlingPrioritiesRate: prioritiesRate,
