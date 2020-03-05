@@ -46,7 +46,7 @@ class TaskDetailsViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBAction func didTapDone(_ sender: Any) {
         let uid = UserDefaults.standard.string(forKey: "uid")!
         
-        getTodo(completion: { (todo, err) in
+        getTodo(uid: uid, completion: { (todo, err) in
             if let err = err {
                 print("Error getting todo: \(err)")
             } else {
@@ -95,7 +95,7 @@ class TaskDetailsViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     // MARK: - Private Methods
     
-    private func getTodo(completion: @escaping (Todo?, Error?) -> Void) {
+    private func getTodo(uid: String, completion: @escaping (Todo?, Error?) -> Void) {
         let title = titleTextView.text!
         let date = Date(dueDatePicker)
         let category = CATEGORY_PICKER_DATA[categoryPicker.selectedRow(inComponent: 0)]
@@ -107,7 +107,7 @@ class TaskDetailsViewController: UIViewController, UIPickerViewDelegate, UIPicke
                         duration: nil, startBy: nil, pauseTime: nil, breaks: nil,
                         timeLag: nil, distractions: nil, prefPlaces: nil)
         
-        getInitialPredictions(todo: todo, completion: { (todo, err) in
+        getInitialPredictions(db: self.db, uid: uid, todo: todo, completion: { (todo, err) in
             if let err = err {
                 completion(nil, err)
             } else {

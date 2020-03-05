@@ -21,6 +21,7 @@ struct Todo {
     var timeLag: Int? // in minutes
     var distractions: Int?
     var prefPlaces: [Place]? = nil
+    var counter: Counter? = nil
     
     init(tid: String?, title: String, due: Date, category: String,
          subject: String, rawPriority: Int, priority: Int?, duration: Int?,
@@ -65,6 +66,10 @@ struct Todo {
                 self.prefPlaces?.append(Place(place))
             }
         }
+        
+        if let counter = dictObj["counter"] {
+            self.counter = Counter(counter as! [String: Int])
+        }
     }
 }
 
@@ -95,6 +100,10 @@ extension Todo {
             data["prefPlaces"] = places
         }
         
+        if counter != nil {
+            data["counter"] = counter?.toDict()
+        }
+        
         return data
     }
 }
@@ -109,13 +118,13 @@ struct Done {
     // ["rawPriority": 0, "duration": 0, "timeLag": 0, "distractions": 0, "breaks": 0, "rating": 0.0, "status": 0, "overdue": 0] For overdue: -Int means number of minutes the task was completed before due date, +Int means how many minutes after due date the task was completed.
     
     init(_ subject: String, _ category: String, _ rawPriority: Int, _ duration: Int,
-         _ timeLab: Int, _ distractions: Int, _ breaks: Int, _ rating: Double,
+         _ timeLag: Int, _ distractions: Int, _ breaks: Int, _ rating: Double,
          _ status: Int, _ overdue: Int) {
         self.key = "\(subject),\(category)"
         self.rating = rating
         let entry: [String: Int] = ["rawPriority": rawPriority,
                                     "duration": duration,
-                                    "timeLab": timeLab,
+                                    "timeLag": timeLag,
                                     "distractions": distractions,
                                     "breaks": breaks,
                                     "status": status,
@@ -136,22 +145,49 @@ extension Done {
     func toDict() -> [String: Any] {
         return ["rating": rating, "logs": logs]
     }
+    
+    func getEasiness() -> Int {
+        return 10 - (Int(rating) / logs.count)
+    }
+    
+    func getAvgDuration() -> Int {
+        var d = 0
+        for log in logs {
+            d += log["duration"]!
+        }
+        
+        return d / logs.count
+    }
+    
+    func getAvgTimeLag() -> Int {
+        var t = 0
+        for log in logs {
+            t += log["timeLag"]!
+        }
+        
+        return t / logs.count
+    }
 }
 
 // MARK: - Done Mutator Methods
 
 extension Done {
-    mutating func log(_ rawPriority: Int, _ duration: Int, _ timeLab: Int,
+    mutating func log(_ rawPriority: Int, _ duration: Int, _ timeLag: Int,
                       _ distractions: Int, _ breaks: Int, _ rating: Double,
                       _ status: Int, _ overdue: Int) {
         self.rating += rating
         let entry: [String: Int] = ["rawPriority": rawPriority,
                                     "duration": duration,
-                                     "timeLab": timeLab,
+                                     "timeLag": timeLag,
                                      "distractions": distractions,
                                      "breaks": breaks,
                                      "status": status,
                                      "overdue": overdue]
         self.logs.append(entry)
+    }
+    
+    mutating func log(done: Done) {
+        self.rating += done.rating
+        self.logs.append(contentsOf: done.logs)
     }
 }

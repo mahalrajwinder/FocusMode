@@ -36,6 +36,9 @@ class TaskTableViewController: UITableViewController {
         
         // Observer for handling completion of a task
         nc.addObserver(self, selector:#selector(deleteTodo), name: NSNotification.Name ("deleteTodo"), object: nil)
+        
+        // Observer for handling progress of a task
+        nc.addObserver(self, selector:#selector(updateTodo), name: NSNotification.Name ("updateTodo"), object: nil)
     }
     
     func loadTodos() {
@@ -59,9 +62,6 @@ class TaskTableViewController: UITableViewController {
                 break
             }
         }
-        let uid = UserDefaults.standard.string(forKey: "uid")!
-        db.markTodoDone(uid: uid, todo: todo)
-        db.incrementTasksCompleted(uid: uid)
         self.tableView.reloadData()
     }
     
@@ -69,6 +69,17 @@ class TaskTableViewController: UITableViewController {
         let todo = notification.userInfo?["newTodo"] as! Todo
         self.tasks.append(todo)
         self.tasks.sort(by: { $0.due.isEarlier(from: $1.due) })
+        self.tableView.reloadData()
+    }
+    
+    @objc func updateTodo(_ notification: Notification) {
+        let todo = notification.userInfo?["updateTodo"] as! Todo
+        for i in 0..<tasks.count {
+            if tasks[i].tid == todo.tid {
+                tasks[i] = todo
+                break
+            }
+        }
         self.tableView.reloadData()
     }
 

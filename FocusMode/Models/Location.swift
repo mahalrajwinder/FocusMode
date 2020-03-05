@@ -15,7 +15,7 @@ struct Location {
     
     init(_ dictObj: [String: Double]) {
         self.lat = dictObj["lat"]!
-        self.lng = dictObj["lgn"]!
+        self.lng = dictObj["lng"]!
     }
 }
 

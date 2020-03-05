@@ -654,6 +654,7 @@
                         <outlet property="timerLabel" destination="IA4-67-CbD" id="dqW-Cv-5Rw"/>
                         <segue destination="ZTC-NL-t1D" kind="presentation" identifier="showRatingSegue" id="BP9-Wi-Q3w"/>
                         <segue destination="UGf-oq-8Y2" kind="presentation" identifier="seeAllSegue" id="P3Q-v6-8Lv"/>
+                        <segue destination="fFy-OY-Nmi" kind="presentation" identifier="ratePlaceSegue" id="TBo-Jf-zOr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q68-Nr-TxC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -668,45 +669,81 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Wi7-sM-uHN">
-                                <rect key="frame" x="39" y="322" width="307" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="Wi7-sM-uHN">
+                                <rect key="frame" x="45" y="144" width="324" height="32"/>
                                 <segments>
                                     <segment title="Satisfied"/>
                                     <segment title="Normal"/>
                                     <segment title="Dissatisfied"/>
                                 </segments>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How do you rate your experience?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppa-gP-MLJ">
-                                <rect key="frame" x="52" y="232" width="281" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How do you rate your experience?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppa-gP-MLJ">
+                                <rect key="frame" x="45" y="90" width="324" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07l-Eq-Klj">
-                                <rect key="frame" x="168" y="525" width="49" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How difficult was the task?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGr-Ct-gER">
+                                <rect key="frame" x="45" y="220" width="324" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07l-Eq-Klj">
+                                <rect key="frame" x="176" y="483" width="62" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="didTapSubmit:" destination="ZTC-NL-t1D" eventType="touchUpInside" id="jss-fH-766"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Clicking done task will show this to rate experience." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buS-nX-e2w">
-                                <rect key="frame" x="113" y="384" width="188" height="103"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="7" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="HP6-ns-qpH">
+                                <rect key="frame" x="43" y="274" width="328" height="31"/>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate the place" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="251-Te-fdT">
+                                <rect key="frame" x="45" y="349" width="324" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4" minValue="1" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="f2G-1v-FUL">
+                                <rect key="frame" x="43" y="403" width="328" height="31"/>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="7tR-6S-Esi" firstAttribute="trailing" secondItem="f2G-1v-FUL" secondAttribute="trailing" constant="45" id="0Tj-gj-YYH"/>
+                            <constraint firstItem="07l-Eq-Klj" firstAttribute="top" secondItem="f2G-1v-FUL" secondAttribute="bottom" constant="50" id="1Uc-pO-RAg"/>
+                            <constraint firstItem="Wi7-sM-uHN" firstAttribute="leading" secondItem="7tR-6S-Esi" secondAttribute="leading" constant="45" id="3R4-HS-yOP"/>
+                            <constraint firstItem="Wi7-sM-uHN" firstAttribute="top" secondItem="ppa-gP-MLJ" secondAttribute="bottom" constant="30" id="EKo-CQ-wMo"/>
+                            <constraint firstItem="07l-Eq-Klj" firstAttribute="centerX" secondItem="YsM-wq-4rE" secondAttribute="centerX" id="Etr-K6-jB2"/>
+                            <constraint firstItem="sGr-Ct-gER" firstAttribute="top" secondItem="Wi7-sM-uHN" secondAttribute="bottom" constant="45" id="HFM-Rk-sXW"/>
+                            <constraint firstItem="f2G-1v-FUL" firstAttribute="top" secondItem="251-Te-fdT" secondAttribute="bottom" constant="30" id="NyR-Sr-nmU"/>
+                            <constraint firstItem="ppa-gP-MLJ" firstAttribute="leading" secondItem="7tR-6S-Esi" secondAttribute="leading" constant="45" id="R76-wp-seZ"/>
+                            <constraint firstItem="7tR-6S-Esi" firstAttribute="trailing" secondItem="HP6-ns-qpH" secondAttribute="trailing" constant="45" id="SBP-wK-f1e"/>
+                            <constraint firstItem="7tR-6S-Esi" firstAttribute="trailing" secondItem="Wi7-sM-uHN" secondAttribute="trailing" constant="45" id="Sr9-bt-8hS"/>
+                            <constraint firstItem="7tR-6S-Esi" firstAttribute="trailing" secondItem="sGr-Ct-gER" secondAttribute="trailing" constant="45" id="eTF-dP-aEN"/>
+                            <constraint firstItem="7tR-6S-Esi" firstAttribute="trailing" secondItem="ppa-gP-MLJ" secondAttribute="trailing" constant="45" id="gUf-Ey-YTZ"/>
+                            <constraint firstItem="251-Te-fdT" firstAttribute="leading" secondItem="7tR-6S-Esi" secondAttribute="leading" constant="45" id="iVe-VV-nOh"/>
+                            <constraint firstItem="HP6-ns-qpH" firstAttribute="top" secondItem="sGr-Ct-gER" secondAttribute="bottom" constant="30" id="k5v-f8-8FO"/>
+                            <constraint firstItem="251-Te-fdT" firstAttribute="top" secondItem="HP6-ns-qpH" secondAttribute="bottom" constant="45" id="o6i-Gr-ml8"/>
+                            <constraint firstItem="HP6-ns-qpH" firstAttribute="leading" secondItem="7tR-6S-Esi" secondAttribute="leading" constant="45" id="p9d-FW-7W0"/>
+                            <constraint firstItem="f2G-1v-FUL" firstAttribute="leading" secondItem="7tR-6S-Esi" secondAttribute="leading" constant="45" id="uNN-PI-ntf"/>
+                            <constraint firstItem="7tR-6S-Esi" firstAttribute="trailing" secondItem="251-Te-fdT" secondAttribute="trailing" constant="45" id="ujn-21-8rw"/>
+                            <constraint firstItem="sGr-Ct-gER" firstAttribute="leading" secondItem="7tR-6S-Esi" secondAttribute="leading" constant="45" id="vLu-g4-KkR"/>
+                            <constraint firstItem="ppa-gP-MLJ" firstAttribute="top" secondItem="7tR-6S-Esi" secondAttribute="top" constant="90" id="xWD-UO-qb5"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="7tR-6S-Esi"/>
                     </view>
+                    <connections>
+                        <outlet property="rateExperience" destination="Wi7-sM-uHN" id="Kdw-9c-yqO"/>
+                        <outlet property="ratePlace" destination="f2G-1v-FUL" id="Y8V-Fq-AFR"/>
+                        <outlet property="rateTask" destination="HP6-ns-qpH" id="Fp2-9l-aFp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2cP-VH-6dG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2149" y="3648"/>
+            <point key="canvasLocation" x="-2297.1014492753625" y="3647.5446428571427"/>
         </scene>
         <!--See All Table View Controller-->
         <scene sceneID="lIM-F5-RF6">
@@ -767,7 +804,54 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Dz-ET-UxR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-368.11594202898556" y="3647.5446428571427"/>
+            <point key="canvasLocation" x="-87" y="3648"/>
+        </scene>
+        <!--Rate Place View Controller-->
+        <scene sceneID="0gE-gN-YBn">
+            <objects>
+                <viewController id="fFy-OY-Nmi" customClass="RatePlaceViewController" customModule="FocusMode" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f8P-G7-B8Z">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4OY-d0-7Gc">
+                                <rect key="frame" x="173" y="226.5" width="68" height="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="didTapSubmit:" destination="fFy-OY-Nmi" eventType="touchUpInside" id="khU-5b-HaD"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate the place" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Cg-3G-ETX">
+                                <rect key="frame" x="45" y="80" width="324" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
+                                <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4" minValue="1" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="NMv-sN-tXx">
+                                <rect key="frame" x="43" y="151.5" width="328" height="31"/>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="2Cg-3G-ETX" firstAttribute="leading" secondItem="zkl-5d-PQ8" secondAttribute="leading" constant="45" id="41E-wO-U2Y"/>
+                            <constraint firstItem="NMv-sN-tXx" firstAttribute="top" secondItem="2Cg-3G-ETX" secondAttribute="bottom" constant="45" id="9XA-e8-V33"/>
+                            <constraint firstItem="zkl-5d-PQ8" firstAttribute="trailing" secondItem="2Cg-3G-ETX" secondAttribute="trailing" constant="45" id="Es4-n6-ffP"/>
+                            <constraint firstItem="NMv-sN-tXx" firstAttribute="leading" secondItem="zkl-5d-PQ8" secondAttribute="leading" constant="45" id="PwK-Yr-rCf"/>
+                            <constraint firstItem="4OY-d0-7Gc" firstAttribute="top" secondItem="NMv-sN-tXx" secondAttribute="bottom" constant="45" id="SKO-se-7aJ"/>
+                            <constraint firstItem="2Cg-3G-ETX" firstAttribute="top" secondItem="zkl-5d-PQ8" secondAttribute="top" constant="80" id="Xdy-kF-i2H"/>
+                            <constraint firstItem="zkl-5d-PQ8" firstAttribute="trailing" secondItem="NMv-sN-tXx" secondAttribute="trailing" constant="45" id="lDH-TS-ItQ"/>
+                            <constraint firstItem="4OY-d0-7Gc" firstAttribute="centerX" secondItem="f8P-G7-B8Z" secondAttribute="centerX" id="uQH-zI-SUx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zkl-5d-PQ8"/>
+                    </view>
+                    <connections>
+                        <outlet property="ratingSlider" destination="NMv-sN-tXx" id="Y0E-bA-Rw1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rek-Xr-QWf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1583" y="3648"/>
         </scene>
         <!--Task Details View Controller-->
         <scene sceneID="erE-2G-1IT">
@@ -1146,7 +1230,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u4t-G6-3AZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1278.2608695652175" y="3647.5446428571427"/>
+            <point key="canvasLocation" x="-887" y="3648"/>
         </scene>
     </scenes>
     <resources>

@@ -103,6 +103,10 @@ extension Place {
             self.logs[key]!["distractions"]! += distractions
         }
     }
+    
+    mutating func log(place: Place) {
+        //
+    }
 }
 
 // MARK: - Private Methods

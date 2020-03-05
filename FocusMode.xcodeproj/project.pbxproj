@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		550651AB2403C92900F71A75 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		550680702410DE96009A3F93 /* RatePlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5506806F2410DE96009A3F93 /* RatePlaceViewController.swift */; };
 		550D313A23DE3ED800927EA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D313923DE3ED800927EA9 /* AppDelegate.swift */; };
 		550D313C23DE3ED800927EA9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D313B23DE3ED800927EA9 /* SceneDelegate.swift */; };
 		550D314123DE3ED800927EA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550D313F23DE3ED800927EA9 /* Main.storyboard */; };
@@ -62,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		187CCE396F97DE8A1BF16A2D /* Pods-FocusMode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusMode.release.xcconfig"; path = "Target Support Files/Pods-FocusMode/Pods-FocusMode.release.xcconfig"; sourceTree = "<group>"; };
+		5506806F2410DE96009A3F93 /* RatePlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatePlaceViewController.swift; sourceTree = "<group>"; };
 		550D313623DE3ED800927EA9 /* FocusMode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusMode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		550D313923DE3ED800927EA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		550D313B23DE3ED800927EA9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				55EC12D4240320E5001DEFC7 /* PlacesTableViewController.swift */,
 				55808CF9240452FF00CB8FFB /* SeeAllTableViewController.swift */,
 				55808CFD2404583800CB8FFB /* RatingViewController.swift */,
+				5506806F2410DE96009A3F93 /* RatePlaceViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5550A0BB23E33A2400AD4034 /* TaskTableViewController.swift in Sources */,
+				550680702410DE96009A3F93 /* RatePlaceViewController.swift in Sources */,
 				5599797A2404B4FB000484A7 /* Place.swift in Sources */,
 				55D4B8D923EBD97B00914112 /* Constants.swift in Sources */,
 				55A44CC124038B01004304EB /* HealthKitManager.swift in Sources */,

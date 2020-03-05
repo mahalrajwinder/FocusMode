@@ -96,4 +96,4 @@ private func getPlaces(coords: Location, type: String,
 
 // https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.644494,-117.840710&radius=1000&type=library&key=AIzaSyDa7o2oqHZX8X7-2zJJ3f2v1Ydd0zgtnhc
 
-// https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name,rating,formatted_phone_number&key=YOUR_API_KEY
+// https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJGZ0F6erf3IARUGpr1dVEWgc&fields=name,rating,formatted_phone_number&key=AIzaSyDa7o2oqHZX8X7-2zJJ3f2v1Ydd0zgtnhc

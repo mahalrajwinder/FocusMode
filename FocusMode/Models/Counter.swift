@@ -46,7 +46,7 @@ extension Counter {
             let offset = initial - left
             return offset / 60
         }
-        return left / 60
+        return (abs(left) + initial) / 60
     }
 }
 

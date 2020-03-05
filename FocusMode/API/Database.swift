@@ -100,17 +100,50 @@ class Database {
     
     // MARK: - Place
     
-    func addPlace() {
+    func addPlace(place: Place) {
         let uid = UserDefaults.standard.string(forKey: "uid")!
-        let location = Location(33.64582920000001, -117.8468481)
-        let place = Place("Science Library", location, "ChIJlYc2bhHe3IAR2uGqbK_4Gxc",
-                          "library", 4.6, "CS_or_Engineering", "Project", 130, 15)
-        
-        self.db.collection("places").document(uid).setData([
-            "\(place.placeID)": place.toDict()
-        ], merge: true) { err in
-            if let err = err {
-                print(err)
+        let docRef = self.db.collection("places").document(uid)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let p = document.get(place.placeID)
+                if p != nil {
+                    var newPlace = Place(p as! [String : Any])
+                    newPlace.log(place: place)
+                    docRef.setData([
+                        "\(newPlace.placeID)": newPlace.toDict()
+                    ], merge: true) { err in
+                        if let err = err {
+                            print("Error adding place: \(err)")
+                        }
+                    }
+                    return
+                }
+            }
+            
+            //
+            docRef.setData([
+                "\(place.placeID)": place.toDict()
+            ], merge: true) { err in
+                if let err = err {
+                    print("Error adding place: \(err)")
+                }
+            }
+        }
+    }
+    
+    func getPlaces(uid: String, completion: @escaping ([Place]?, Error?) -> Void) {
+        let docRef = self.db.collection("places").document(uid)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                var places = [Place]()
+                
+                for (_,v) in document.data()! {
+                    let place = Place(v as! [String : Any])
+                    places.append(place)
+                }
+                completion(places, nil)
+            } else {
+                completion(nil, error)
             }
         }
     }
@@ -133,34 +166,33 @@ class Database {
         }
     }
     
-    func markTodoDone(uid: String, todo: Todo) {
+    func updateTodo(uid: String, todo: Todo) {
+        let tasksRef = self.db.collection("tasks")
+        let tasks = tasksRef.document(uid)
+        let todoRef = tasks.collection("todo").document(todo.tid)
+        
+        todoRef.setData(todo.toDict(), merge: true) { err in
+            if let err = err {
+                print("Error updating todo: \(err)")
+            }
+        }
+    }
+    
+    func markTodoDone(uid: String, tid: String, done: Done) {
         let tasksRef = self.db.collection("tasks").document(uid)
         
         // [START Adding task to done collection]
-        let status = 1
-        let overdue = -30
-        let rating = 7.5
-        let duration = 60
-        let timeLag = 70
-        let distractions = 12
-        let breaks = 4
-        
-        let key = "\(todo.subject),\(todo.category)"
-        let docRef = tasksRef.collection("done").document(key)
+        let docRef = tasksRef.collection("done").document(done.key)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                var done = Done(key, document.data()!)
-                done.log(todo.rawPriority, duration, timeLag,
-                         distractions, breaks, rating, status, overdue)
-                docRef.setData(done.toDict(), merge: true) { err in
+                var oldDone = Done(done.key, document.data()!)
+                oldDone.log(done: done)
+                docRef.setData(oldDone.toDict(), merge: true) { err in
                     if let err = err {
                         print("Error marking task done: \(err)")
                     }
                 }
             } else {
-                let done = Done(todo.subject, todo.category, todo.rawPriority,
-                                duration, timeLag, distractions, breaks,
-                                rating, status, overdue)
                 docRef.setData(done.toDict()) { err in
                     if let err = err {
                         print("Error marking task done: \(err)")
@@ -171,7 +203,7 @@ class Database {
         // [END Adding task to done collection]
         
         // [START deleting task from todo collection]
-        tasksRef.collection("todo").document(todo.tid).delete() { err in
+        tasksRef.collection("todo").document(tid).delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")
             }
@@ -195,6 +227,32 @@ class Database {
         }
     }
     
+    func getDoneTasks(uid: String, subject: String, category: String,
+                  completion: @escaping (Done?, Error?) -> Void) {
+        let tasksRef = self.db.collection("tasks")
+        let tasks = tasksRef.document(uid)
+        let doneRef = tasks.collection("done").document("\(subject),\(category)")
+        
+        doneRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let done = Done(document.documentID, document.data()!)
+                completion(done, nil)
+            } else {
+                // find similar documents
+                completion(nil, error)
+            }
+        }
+        
+//        doneRef.getDocuments() { (querySnapshot, err) in
+//            if let err = err {
+//                completion(nil, err)
+//            } else {
+//                let doneTasks = self.getDoneTaskArray(querySnapshot: querySnapshot!)
+//                completion(doneTasks, nil)
+//            }
+//        }
+    }
+    
     // MARK: - Private Methods
     
     private func getTodoArray(querySnapshot: QuerySnapshot) -> [Todo] {
@@ -205,5 +263,15 @@ class Database {
             todos.append(todo)
         }
         return todos
+    }
+    
+    private func getDoneTaskArray(querySnapshot: QuerySnapshot) -> [Done] {
+        var doneTasks = [Done]()
+        
+        for doc in querySnapshot.documents {
+            let done = Done(doc.documentID, doc.data())
+            doneTasks.append(done)
+        }
+        return doneTasks
     }
 }
