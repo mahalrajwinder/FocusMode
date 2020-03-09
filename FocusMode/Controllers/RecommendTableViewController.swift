@@ -41,12 +41,16 @@ class RecommendTableViewController: UITableViewController {
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-                // re-calculate priority: urgency & remaining duration
+                for var todo in todos! {
+                    let date = todo.due
+                    let urgency = date.minutes(from: Date())
+                    todo.priority! *= urgency
+                    self.tasks.append(todo)
+                }
                 // Apply context if user is near a place and one of the task has
                 // that place as the preferred place.
                 // (priority * urgency) - duration
-                // change sorting criteria
-                self.tasks = todos!.sorted(by: { $0.due.isEarlier(from: $1.due) })
+                self.tasks.sort(by: { $0.priority! < $1.priority! })
                 self.tableView.reloadData()
             }
         })
@@ -64,12 +68,12 @@ class RecommendTableViewController: UITableViewController {
     }
     
     @objc func reloadWithNewTodo(_ notification: Notification) {
-        let todo = notification.userInfo?["newTodo"] as! Todo
-        // calculate priority for new task
-        // apply priority * urgency - duration
-        // chnage sorting criteria.
+        var todo = notification.userInfo?["newTodo"] as! Todo
+        let date = todo.due
+        let urgency = date.minutes(from: Date())
+        todo.priority! *= urgency
         self.tasks.append(todo)
-        self.tasks.sort(by: { $0.due.isEarlier(from: $1.due) })
+        self.tasks.sort(by: { $0.priority! < $1.priority! })
         self.tableView.reloadData()
     }
     
@@ -112,7 +116,11 @@ class RecommendTableViewController: UITableViewController {
         
         cell.distractionsLabel.text = String(task.distractions!)
         cell.breaksLabel.text = String(task.breaks!)
-        cell.timeLagLabel.text = Counter(task.timeLag!).toString()
+        var timeLag = task.timeLag!
+        if let pauseTime = task.pauseTime {
+            timeLag += Date().minutes(from: pauseTime)
+        }
+        cell.timeLagLabel.text = Counter(timeLag).toString()
         
         return cell
     }

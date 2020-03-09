@@ -38,7 +38,7 @@ class PlacesTableViewController: UITableViewController, UISearchResultsUpdating,
                 if let err = err {
                     print("Error getting places: \(err)")
                 } else {
-                    self.places = places!
+                    self.places = places!.sorted(by: { $0.location - self.coords! < $1.location - self.coords!})
                     // do sorting and apply personalization filters here
                     self.tableView.reloadData()
                 }

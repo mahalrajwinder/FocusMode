@@ -15,20 +15,24 @@ class TaskBeginViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var placeRatingLabel: UILabel!
+    @IBOutlet weak var taskProductivityLabel: UILabel!
+    @IBOutlet weak var avgProductivityLabel: UILabel!
     @IBOutlet weak var startPauseBtn: UIButton!
     
     let locationManager = CLLocationManager()
-    let motionManager = CMMotionManager()
+    let motionManager = CMMotionActivityManager()
     var db: Database!
     var coords: Location? = nil
     var places = [Place]()
-    var timer:Timer?
+    var timer: Timer?
+    var motionTimer: Timer?
     var counter: Counter?
     var isPaused = true
     var task: Todo!
     var workingPlace: PlaceShort? = nil
     var secondsWorked = 0
     var distractions = 0
+    var lastDistractionSecondsAgo = 0
     
     
     override func viewDidLoad() {
@@ -58,6 +62,8 @@ class TaskBeginViewController: UIViewController, CLLocationManagerDelegate {
             let place = self.places[0]
             self.placeNameLabel.text = place.name
             self.placeRatingLabel.text = "Rating: \(place.getRating())"
+            self.taskProductivityLabel.text = String(format: "Task Productivity Rate: %.2f%%", place.getProductivity(self.task.subject, self.task.category))
+            self.avgProductivityLabel.text = String(format: "Average Productivity Rate: %.2f%%", place.getAvgProductivity())
             
             getNearByPlaces(coords: self.coords!, completion: { (newPlaces, err) in
                 if let err = err {
@@ -70,6 +76,8 @@ class TaskBeginViewController: UIViewController, CLLocationManagerDelegate {
                     // Otherwise create a newPlace entry.
                 }
             })
+            
+            // call weather function here
         }
     }
     
@@ -84,7 +92,9 @@ class TaskBeginViewController: UIViewController, CLLocationManagerDelegate {
         
         task.counter = counter
         task.pauseTime = Date()
-        task.breaks! += 1
+        if !isPaused {
+            task.breaks! += 1
+        }
         task.distractions! += distractions
         
         let uid = UserDefaults.standard.string(forKey: "uid")!
@@ -117,6 +127,7 @@ class TaskBeginViewController: UIViewController, CLLocationManagerDelegate {
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
             self.startPauseBtn.setTitle("Pause", for: .normal)
             isPaused = false
+            startDetectingMotion()
         } else {
             timer?.invalidate()
             timer = nil
@@ -124,11 +135,23 @@ class TaskBeginViewController: UIViewController, CLLocationManagerDelegate {
             task.breaks! += 1
             self.startPauseBtn.setTitle("Start", for: .normal)
             isPaused = true
+            endDetectingMotion()
         }
     }
     
     @IBAction func didTapSeeAll(_ sender: Any) {
         performSegue(withIdentifier: "seeAllSegue", sender: nil)
+    }
+    
+    @objc func onMotionTimer() {
+        if lastDistractionSecondsAgo >= 60 {
+            motionTimer?.invalidate()
+            motionTimer = nil
+            lastDistractionSecondsAgo = 0
+        } else {
+            lastDistractionSecondsAgo += 1
+        }
+        print(lastDistractionSecondsAgo)
     }
     
     @objc func onTimerFires()
@@ -167,9 +190,28 @@ class TaskBeginViewController: UIViewController, CLLocationManagerDelegate {
     
     // MARK: - Private Methods
     
-    func applyContextToPlaces(coords: Location, places: [Place]) -> [Place] {
-        // TODO: apply weights to rank and nearest to current location
-        // then sort
-        return places
+    private func applyContextToPlaces(coords: Location, places: [Place]) -> [Place] {
+        // Sort based on place ratings and distance
+        return places.sorted(by: { $0.location - coords < $1.location - coords})
+    }
+    
+    private func startDetectingMotion() {
+        if !CMMotionActivityManager.isActivityAvailable() {
+            return
+        }
+        self.motionManager.startActivityUpdates(to: OperationQueue.main) { (motion) in
+            if (motion?.stationary)! && self.lastDistractionSecondsAgo == 0 {
+                self.distractions += 1
+                 self.motionTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.onMotionTimer), userInfo: nil, repeats: true)
+            }
+        }
+    }
+    
+    private func endDetectingMotion() {
+        motionManager.stopActivityUpdates()
+        if motionTimer != nil {
+            motionTimer?.invalidate()
+            motionTimer = nil
+        }
     }
 }

@@ -37,6 +37,7 @@ class SeeAllTableViewController: UITableViewController {
         let place = places[indexPath.row]
         cell.nameLabel.text = place.name
         cell.ratingLabel.text = "Rating: \(place.getRating())"
+        cell.productivityLabel.text = String(format: "Average Productivity Rate: %.2f%%", place.getAvgProductivity())
 
         return cell
     }
