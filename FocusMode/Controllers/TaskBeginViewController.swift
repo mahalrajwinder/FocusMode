@@ -73,7 +73,6 @@ class TaskBeginViewController: UIViewController, CLLocationManagerDelegate {
                 }
             })
             
-            // call weather function here
         }
     }
     
