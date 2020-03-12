@@ -41,7 +41,7 @@ func getInitialPredictions(db: Database, uid: String, todo: Todo,
                     print("Error getting Done tasks")
                     completion(nil, err)
                 } else {
-                    ltodo.priority = ltodo.rawPriority * (task?.getEasiness())!
+                    ltodo.priority = ltodo.rawPriority + (task?.getEasiness())!
                     ltodo.duration = task?.getAvgDuration()
                     ltodo.startBy = ltodo.duration! + (task?.getAvgTimeLag())!
                     completion(ltodo, nil)
@@ -49,12 +49,6 @@ func getInitialPredictions(db: Database, uid: String, todo: Todo,
             })
         }
     })
-}
-
-func calculatePriority(todo: Todo, task: Done) -> Int {
-//    let date = todo.due
-//    let urgency = date.minutes(from: Date())
-    return todo.rawPriority * task.getEasiness()
 }
 
 func getRankedPlaces(todo: Todo, places: [Place]) -> [Place] {

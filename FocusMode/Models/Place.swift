@@ -105,7 +105,18 @@ extension Place {
     }
     
     mutating func log(place: Place) {
-        //
+        self.ratings += place.ratings
+        self.count += place.count
+        
+        for (key, entry) in place.logs {
+            if self.logs.index(forKey: key) == nil {
+                self.logs[key] = entry
+            } else {
+                self.logs[key]!["frequency"]! += entry["frequency"]!
+                self.logs[key]!["minutesWorked"]! += entry["minutesWorked"]!
+                self.logs[key]!["distractions"]! += entry["distractions"]!
+            }
+        }
     }
 }
 

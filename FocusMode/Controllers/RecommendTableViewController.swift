@@ -41,16 +41,9 @@ class RecommendTableViewController: UITableViewController {
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-                for var todo in todos! {
-                    let date = todo.due
-                    let urgency = date.minutes(from: Date())
-                    todo.priority! *= urgency
-                    self.tasks.append(todo)
-                }
+                self.tasks = todos!.sorted(by: { self.hasHighPriority($0, $1)})
                 // Apply context if user is near a place and one of the task has
                 // that place as the preferred place.
-                // (priority * urgency) - duration
-                self.tasks.sort(by: { $0.priority! < $1.priority! })
                 self.tableView.reloadData()
             }
         })
@@ -68,26 +61,21 @@ class RecommendTableViewController: UITableViewController {
     }
     
     @objc func reloadWithNewTodo(_ notification: Notification) {
-        var todo = notification.userInfo?["newTodo"] as! Todo
-        let date = todo.due
-        let urgency = date.minutes(from: Date())
-        todo.priority! *= urgency
+        let todo = notification.userInfo?["newTodo"] as! Todo
         self.tasks.append(todo)
-        self.tasks.sort(by: { $0.priority! < $1.priority! })
+        self.tasks.sort(by: { self.hasHighPriority($0, $1)})
         self.tableView.reloadData()
     }
     
     @objc func updateTodo(_ notification: Notification) {
         let todo = notification.userInfo?["updateTodo"] as! Todo
-        // calculate priority for todo
-        // apply urgency * prioriTy - duration
         for i in 0..<tasks.count {
             if tasks[i].tid == todo.tid {
                 tasks[i] = todo
                 break
             }
         }
-        // sort tasks now.
+        self.tasks.sort(by: { self.hasHighPriority($0, $1)})
         self.tableView.reloadData()
     }
 
@@ -141,5 +129,26 @@ class RecommendTableViewController: UITableViewController {
             // De-selects the selected task cell
             tableView.deselectRow(at: indexPath, animated: true)
         }
+    }
+    
+    // MARK: - Private Methods
+    
+    func hasHighPriority(_ lhs: Todo, _ rhs: Todo) -> Bool {
+        let lhsUrgency = lhs.due.minutes(from: Date())
+        let rhsUrgency = rhs.due.minutes(from: Date())
+        
+        if lhs.priority == rhs.priority {
+            return lhsUrgency < rhsUrgency
+        }
+        
+        var percentageDiff = abs(lhsUrgency - rhsUrgency)
+        percentageDiff /= ((lhsUrgency + rhsUrgency) / 2)
+        percentageDiff *= 100
+        
+        if percentageDiff <= 25 {
+            return lhs.priority! < rhs.priority!
+        }
+        
+        return lhs.priority! + Int((Double(lhsUrgency) * 0.01)) < rhs.priority! + Int((Double(rhsUrgency) * 0.01))
     }
 }

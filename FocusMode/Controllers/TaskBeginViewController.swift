@@ -69,11 +69,7 @@ class TaskBeginViewController: UIViewController, CLLocationManagerDelegate {
                 if let err = err {
                     print("Error getting places: \(err)")
                 } else {
-                    // sort newPlaces based on distance
-                    // Remove all places outside of 100 meters radius
-                    // check if any of the placeID is in user DB
-                    // if so, update Class variable for DB
-                    // Otherwise create a newPlace entry.
+                    self.parseCurrentLocation(self.coords!, newPlaces!)
                 }
             })
             
@@ -191,8 +187,33 @@ class TaskBeginViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: - Private Methods
     
     private func applyContextToPlaces(coords: Location, places: [Place]) -> [Place] {
-        // Sort based on place ratings and distance
-        return places.sorted(by: { $0.location - coords < $1.location - coords})
+        return places.sorted(by: { hasHighRank($0, $1, coords) })
+    }
+    
+    private func hasHighRank(_ lhs: Place, _ rhs: Place, _ coords: Location) -> Bool {
+        let lhsDistance = lhs.location - coords
+        let rhsDistance = rhs.location - coords
+        
+        var percentageDiff = abs(lhsDistance - rhsDistance)
+        percentageDiff /= ((lhsDistance + rhsDistance) / 2)
+        percentageDiff *= 100
+        
+        if percentageDiff <= 25 {
+            return lhs.getRating() * (lhs.getAvgProductivity() / 100) >
+                rhs.getRating() * (rhs.getAvgProductivity() / 100)
+        }
+        
+        return lhsDistance < rhsDistance
+    }
+    
+    private func parseCurrentLocation(_ coords: Location, _ places: [PlaceShort]) {
+        let newPlaces = places.sorted(by: { $0.location - coords < $1.location - coords})
+        if newPlaces.count != 0 {
+            let currentPlace = newPlaces[0]
+            if currentPlace.location - coords < 500 {
+                workingPlace = currentPlace
+            }
+        }
     }
     
     private func startDetectingMotion() {

@@ -101,12 +101,19 @@ class Database {
     // MARK: - Place
     
     func addPlace(place: Place) {
+        // Check if placeID already in user logs
+        // If so, update logs
+        // Otherwise add new location entry to logs
+        //print(place)
         let uid = UserDefaults.standard.string(forKey: "uid")!
         let docRef = self.db.collection("places").document(uid)
+        print("Gettting")
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
+                print("Got document")
                 let p = document.get(place.placeID)
                 if p != nil {
+                    print("Got place")
                     var newPlace = Place(p as! [String : Any])
                     newPlace.log(place: place)
                     docRef.setData([
@@ -119,6 +126,7 @@ class Database {
                     return
                 }
             }
+            print("Second")
             
             //
             docRef.setData([
