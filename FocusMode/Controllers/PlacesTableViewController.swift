@@ -118,15 +118,23 @@ class PlacesTableViewController: UITableViewController, UISearchResultsUpdating,
         return cell
     }
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if (segue.identifier == "searchSegue") {
+            // Find the selected task
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPath(for: cell)!
+            let place = searchController.isActive ? searchResults[indexPath.row] : places[indexPath.row]
+            
+            // Pass the selected place to the details view controller
+            let placeDetailViewController = segue.destination as! PlaceDetailViewController
+            placeDetailViewController.place = place
+            
+            // De-selects the selected task cell
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
-    */
     
     private func rankResults(_ coords: Location, _ places: [PlaceShort], _ prefPlaces: [Place]) {
         let rankedPlaces = places.sorted(by: { hasHighRank($0, $1, self.coords!)})

@@ -1329,6 +1329,7 @@
                                 <connections>
                                     <outlet property="nameLabel" destination="5fu-cn-P67" id="Yc6-e4-aka"/>
                                     <outlet property="ratingLabel" destination="YBR-9m-8Fr" id="Upf-V4-JkY"/>
+                                    <segue destination="XzZ-t6-Zjy" kind="presentation" identifier="searchSegue" id="Gb8-gh-TAr"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1342,6 +1343,82 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7uJ-28-4Jg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-259.4202898550725" y="2065.8482142857142"/>
+        </scene>
+        <!--Place Detail View Controller-->
+        <scene sceneID="j8A-3Q-Scf">
+            <objects>
+                <viewController id="XzZ-t6-Zjy" customClass="PlaceDetailViewController" customModule="FocusMode" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xSm-dE-Gic">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JnR-dF-3Q1">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                <items>
+                                    <navigationItem title="Place Details" id="qFI-K1-x0r">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="9xZ-uQ-XLf">
+                                            <connections>
+                                                <action selector="didTapCancel:" destination="XzZ-t6-Zjy" id="Dt0-iN-fmS"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PV8-XT-QvM">
+                                <rect key="frame" x="45" y="101" width="324" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewe-0I-feW">
+                                <rect key="frame" x="45" y="155" width="324" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jdp-7A-319">
+                                <rect key="frame" x="45" y="207" width="324" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open now" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgL-rL-Iqd">
+                                <rect key="frame" x="45" y="259" width="324" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="PV8-XT-QvM" firstAttribute="top" secondItem="JnR-dF-3Q1" secondAttribute="bottom" constant="45" id="1MW-DG-Njs"/>
+                            <constraint firstItem="pgL-rL-Iqd" firstAttribute="top" secondItem="Jdp-7A-319" secondAttribute="bottom" constant="30" id="Btg-pq-ioe"/>
+                            <constraint firstItem="JnR-dF-3Q1" firstAttribute="trailing" secondItem="L7L-C8-0aE" secondAttribute="trailing" id="HWr-oL-Qbv"/>
+                            <constraint firstItem="Jdp-7A-319" firstAttribute="leading" secondItem="L7L-C8-0aE" secondAttribute="leading" constant="45" id="Huq-7x-SdL"/>
+                            <constraint firstItem="L7L-C8-0aE" firstAttribute="trailing" secondItem="ewe-0I-feW" secondAttribute="trailing" constant="45" id="KOn-1t-Pm1"/>
+                            <constraint firstItem="PV8-XT-QvM" firstAttribute="leading" secondItem="L7L-C8-0aE" secondAttribute="leading" constant="45" id="Kri-og-gj3"/>
+                            <constraint firstItem="pgL-rL-Iqd" firstAttribute="leading" secondItem="L7L-C8-0aE" secondAttribute="leading" constant="45" id="LlP-lV-BBI"/>
+                            <constraint firstItem="ewe-0I-feW" firstAttribute="leading" secondItem="L7L-C8-0aE" secondAttribute="leading" constant="45" id="YzK-DM-agm"/>
+                            <constraint firstItem="L7L-C8-0aE" firstAttribute="trailing" secondItem="Jdp-7A-319" secondAttribute="trailing" constant="45" id="ZoP-9u-8Wj"/>
+                            <constraint firstItem="JnR-dF-3Q1" firstAttribute="top" secondItem="L7L-C8-0aE" secondAttribute="top" id="c2m-8m-wjc"/>
+                            <constraint firstItem="L7L-C8-0aE" firstAttribute="trailing" secondItem="pgL-rL-Iqd" secondAttribute="trailing" constant="45" id="oKM-j2-ojr"/>
+                            <constraint firstItem="L7L-C8-0aE" firstAttribute="trailing" secondItem="PV8-XT-QvM" secondAttribute="trailing" constant="45" id="oLJ-xT-ejP"/>
+                            <constraint firstItem="ewe-0I-feW" firstAttribute="top" secondItem="PV8-XT-QvM" secondAttribute="bottom" constant="30" id="pZC-6d-Q8L"/>
+                            <constraint firstItem="JnR-dF-3Q1" firstAttribute="leading" secondItem="L7L-C8-0aE" secondAttribute="leading" id="t8X-f9-0au"/>
+                            <constraint firstItem="Jdp-7A-319" firstAttribute="top" secondItem="ewe-0I-feW" secondAttribute="bottom" constant="30" id="vKt-pQ-0sb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="L7L-C8-0aE"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="PV8-XT-QvM" id="D1C-YK-Zcw"/>
+                        <outlet property="openNowLabel" destination="pgL-rL-Iqd" id="SIY-x3-35A"/>
+                        <outlet property="ratingLabel" destination="ewe-0I-feW" id="8b7-K3-9LS"/>
+                        <outlet property="typeLabel" destination="Jdp-7A-319" id="cPu-cx-LPg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aaf-zJ-X10" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="624" y="2071"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EvZ-Ai-drr">
@@ -1370,6 +1447,6 @@
         <image name="user" width="25" height="30.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ftC-0E-V6L"/>
+        <segue reference="XpZ-fy-v5J"/>
     </inferredMetricsTieBreakers>
 </document>

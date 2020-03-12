@@ -30,6 +30,7 @@
 		5592388323DE425B00DDC774 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5592388223DE425B00DDC774 /* WelcomeViewController.swift */; };
 		5592CB6A23E7FC7B002B313C /* TaskBeginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5592CB6923E7FC7B002B313C /* TaskBeginViewController.swift */; };
 		5599797A2404B4FB000484A7 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559979792404B4FB000484A7 /* Place.swift */; };
+		5599A603241A2CB40049B9DD /* PlaceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5599A602241A2CB40049B9DD /* PlaceDetailViewController.swift */; };
 		55A03472241183520078EA4C /* RecommendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A03471241183520078EA4C /* RecommendTableViewController.swift */; };
 		55A03474241184BD0078EA4C /* RecommendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A03473241184BD0078EA4C /* RecommendCell.swift */; };
 		55A196A423DFA8760034A256 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A196A323DFA8760034A256 /* Task.swift */; };
@@ -88,6 +89,7 @@
 		5592388223DE425B00DDC774 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		5592CB6923E7FC7B002B313C /* TaskBeginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskBeginViewController.swift; sourceTree = "<group>"; };
 		559979792404B4FB000484A7 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		5599A602241A2CB40049B9DD /* PlaceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailViewController.swift; sourceTree = "<group>"; };
 		55A03471241183520078EA4C /* RecommendTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendTableViewController.swift; sourceTree = "<group>"; };
 		55A03473241184BD0078EA4C /* RecommendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCell.swift; sourceTree = "<group>"; };
 		55A196A323DFA8760034A256 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				55808CFD2404583800CB8FFB /* RatingViewController.swift */,
 				5506806F2410DE96009A3F93 /* RatePlaceViewController.swift */,
 				55A03471241183520078EA4C /* RecommendTableViewController.swift */,
+				5599A602241A2CB40049B9DD /* PlaceDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				55808CFA240452FF00CB8FFB /* SeeAllTableViewController.swift in Sources */,
 				55D4B8D423EBD09600914112 /* Weather.swift in Sources */,
 				5592388323DE425B00DDC774 /* WelcomeViewController.swift in Sources */,
+				5599A603241A2CB40049B9DD /* PlaceDetailViewController.swift in Sources */,
 				55B6C4DB23E00BCE00EA22DF /* SignUpViewController.swift in Sources */,
 				550D313A23DE3ED800927EA9 /* AppDelegate.swift in Sources */,
 				550D313C23DE3ED800927EA9 /* SceneDelegate.swift in Sources */,
