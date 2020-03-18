@@ -47,8 +47,59 @@ class Database {
 //            print("Steps: \(steps)")
 //        })
         
-        let temp = ["temperatures": 70, "count": 1]
+        let usersRef = self.db.collection("profile")
         
+        usersRef.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                completion(err)
+            } else {
+                let profiles = self.getProfileArray(querySnapshot: querySnapshot!)
+                // get best user match
+                let match = profiles[0]
+                let matchedUID = match.uid
+                
+                //
+                print("Matched....")
+                let tasksRef = self.db.collection("tasks").document(profile.uid)
+                let doneRef = tasksRef.collection("done")
+                
+                // GET Done task data
+                let mTasksRef = self.db.collection("tasks").document(matchedUID)
+                let mDoneRef = mTasksRef.collection("done")
+                mDoneRef.getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        completion(err)
+                    } else {
+                        let doneTasks = self.getDoneTaskArray(querySnapshot: querySnapshot!)
+                        for done in doneTasks {
+                            print("Adding MATCGHED DONE TASK")
+                            doneRef.document(done.key).setData(done.toDict()) { err in
+                                if let err = err {
+                                    print("Error marking task done: \(err)")
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // Add places
+                let placeRef = self.db.collection("places").document(profile.uid)
+                let matchedPlacesRef = self.db.collection("places").document(matchedUID)
+                matchedPlacesRef.getDocument { (document, error) in
+                    if let document = document, document.exists {
+                        placeRef.setData(document.data()!, merge: true) { err in
+                            if let err = err {
+                                print("Error updating places: \(err)")
+                            }
+                            print("Adding PLACE DOC MATCHED")
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        let temp = ["temperatures": 70, "count": 1]
         self.db.collection("model").document(profile.uid).setData([
             "tasksCreated": 0,
             "tasksCompleted": 0,
@@ -59,7 +110,7 @@ class Database {
             if let err = err {
                 completion(err)
             } else {
-                completion(nil)
+                //completion(nil)
             }
         }
     }
@@ -301,5 +352,17 @@ class Database {
             doneTasks.append(done)
         }
         return doneTasks
+    }
+    
+    private func getProfileArray(querySnapshot: QuerySnapshot) -> [Profile] {
+        let uid = UserDefaults.standard.string(forKey: "uid")!
+        var profiles = [Profile]()
+        
+        for doc in querySnapshot.documents {
+            let profile = Profile(uid, doc.data())
+            profiles.append(profile)
+        }
+        
+        return profiles
     }
 }

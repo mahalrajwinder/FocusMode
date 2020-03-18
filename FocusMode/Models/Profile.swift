@@ -47,14 +47,14 @@ struct Profile {
         self.gender = dictObj["gender"] as! String
         self.height = dictObj["height"] as! Double
         self.weight = dictObj["weight"] as! Double
-        self.address = Location(dictObj["timePreference"] as! [String: Double])
-        self.major = dictObj["bedtime"] as! String
-        self.timePreference = dictObj["major"] as! String
+        self.address = Location(dictObj["address"] as! [String: Double])
+        self.major = dictObj["major"] as! String
+        self.timePreference = dictObj["timePreference"] as! String
         self.dailyGoal = dictObj["dailyGoal"] as! Int
-        self.bedtime = dictObj["successRate"] as! String
-        self.successRate = dictObj["handlingPrioritiesRate"] as! Double
-        self.handlingPrioritiesRate = dictObj["hardworkingRate"] as! Double
-        self.hardworkingRate = dictObj["address"] as! Double
+        self.bedtime = dictObj["bedtime"] as! String
+        self.successRate = dictObj["successRate"] as! Double
+        self.handlingPrioritiesRate = dictObj["handlingPrioritiesRate"] as! Double
+        self.hardworkingRate = dictObj["hardworkingRate"] as! Double
     }
     
     func toDict() -> [String: Any] {
