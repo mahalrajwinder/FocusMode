@@ -1224,6 +1224,62 @@
             </objects>
             <point key="canvasLocation" x="783" y="1369"/>
         </scene>
+        <!--Alerts-->
+        <scene sceneID="l6S-Oq-XFe">
+            <objects>
+                <tableViewController id="dSx-TT-unE" customClass="AlertsTableViewController" customModule="FocusMode" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="LKz-bY-icB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="alertCell" rowHeight="105" id="Kgh-3H-DPz" customClass="AlertCell" customModule="FocusMode" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="105"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kgh-3H-DPz" id="XNh-rY-mY9">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="105"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TaQ-AT-Lpu">
+                                            <rect key="frame" x="50" y="26" width="314" height="24"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3av-ed-nng">
+                                            <rect key="frame" x="50" y="65" width="314" height="21.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="3av-ed-nng" firstAttribute="top" secondItem="TaQ-AT-Lpu" secondAttribute="bottom" constant="15" id="BK3-xb-oCe"/>
+                                        <constraint firstItem="TaQ-AT-Lpu" firstAttribute="top" secondItem="XNh-rY-mY9" secondAttribute="topMargin" constant="15" id="ZHb-dG-dag"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="TaQ-AT-Lpu" secondAttribute="trailing" constant="30" id="ZSC-yE-sV6"/>
+                                        <constraint firstItem="TaQ-AT-Lpu" firstAttribute="leading" secondItem="XNh-rY-mY9" secondAttribute="leadingMargin" constant="30" id="aGs-7Y-VxX"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="3av-ed-nng" secondAttribute="trailing" constant="30" id="cox-CM-FMO"/>
+                                        <constraint firstItem="3av-ed-nng" firstAttribute="leading" secondItem="XNh-rY-mY9" secondAttribute="leadingMargin" constant="30" id="gzq-w4-PuB"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="3av-ed-nng" secondAttribute="bottom" constant="7.5" id="yZi-Lq-Lj6"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="descriptionLabel" destination="3av-ed-nng" id="GHQ-yy-9GE"/>
+                                    <outlet property="typeLabel" destination="TaQ-AT-Lpu" id="F57-z2-mCH"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="dSx-TT-unE" id="zi8-zs-ISV"/>
+                            <outlet property="delegate" destination="dSx-TT-unE" id="Ji5-TT-V44"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Alerts" id="cfy-6c-Bmh"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2vJ-2s-h0r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1673.913043478261" y="1364.7321428571429"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="HsD-iE-0m3">
             <objects>
@@ -1239,6 +1295,7 @@
                         <segue destination="018-9o-rEz" kind="relationship" relationship="viewControllers" id="26v-8C-Jjb"/>
                         <segue destination="7pL-cc-6T1" kind="relationship" relationship="viewControllers" id="BxG-Wi-hQC"/>
                         <segue destination="iDI-MT-7eI" kind="relationship" relationship="viewControllers" id="AD4-mS-vDv"/>
+                        <segue destination="dSx-TT-unE" kind="relationship" relationship="viewControllers" id="E9g-Jy-km2"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="goy-4e-XZB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

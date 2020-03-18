@@ -45,6 +45,8 @@
 		55D4B8D923EBD97B00914112 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D4B8D823EBD97B00914112 /* Constants.swift */; };
 		55EBDEB623EBFC2000907856 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EBDEB523EBFC2000907856 /* Database.swift */; };
 		55EC12D5240320E5001DEFC7 /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC12D4240320E5001DEFC7 /* PlacesTableViewController.swift */; };
+		55F071AA241AAA1F00FADFBB /* AlertsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F071A9241AAA1F00FADFBB /* AlertsTableViewController.swift */; };
+		55F071AC241AAAF500FADFBB /* AlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F071AB241AAAF500FADFBB /* AlertCell.swift */; };
 		55F71EEF23ECB056006D3EC0 /* Prediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F71EEE23ECB056006D3EC0 /* Prediction.swift */; };
 		55F71EF323ECB3B7006D3EC0 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F71EF223ECB3B7006D3EC0 /* Location.swift */; };
 		C4CAD5D379D9849A4B402E9B /* libPods-FocusMode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7840A56226D0E68EAE96E034 /* libPods-FocusMode.a */; };
@@ -106,6 +108,8 @@
 		55D4B8D823EBD97B00914112 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		55EBDEB523EBFC2000907856 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		55EC12D4240320E5001DEFC7 /* PlacesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
+		55F071A9241AAA1F00FADFBB /* AlertsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsTableViewController.swift; sourceTree = "<group>"; };
+		55F071AB241AAAF500FADFBB /* AlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCell.swift; sourceTree = "<group>"; };
 		55F71EEE23ECB056006D3EC0 /* Prediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prediction.swift; sourceTree = "<group>"; };
 		55F71EF223ECB3B7006D3EC0 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		7840A56226D0E68EAE96E034 /* libPods-FocusMode.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FocusMode.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,6 +193,7 @@
 				5506806F2410DE96009A3F93 /* RatePlaceViewController.swift */,
 				55A03471241183520078EA4C /* RecommendTableViewController.swift */,
 				5599A602241A2CB40049B9DD /* PlaceDetailViewController.swift */,
+				55F071A9241AAA1F00FADFBB /* AlertsTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -200,6 +205,7 @@
 				55A44CC42403BC72004304EB /* PlaceTableViewCell.swift */,
 				55808CFB240455DD00CB8FFB /* PlaceCell.swift */,
 				55A03473241184BD0078EA4C /* RecommendCell.swift */,
+				55F071AB241AAAF500FADFBB /* AlertCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -379,9 +385,11 @@
 				550D313A23DE3ED800927EA9 /* AppDelegate.swift in Sources */,
 				550D313C23DE3ED800927EA9 /* SceneDelegate.swift in Sources */,
 				55EC12D5240320E5001DEFC7 /* PlacesTableViewController.swift in Sources */,
+				55F071AA241AAA1F00FADFBB /* AlertsTableViewController.swift in Sources */,
 				55A44CC52403BC72004304EB /* PlaceTableViewCell.swift in Sources */,
 				55B6C4DD23E00BF000EA22DF /* SignInViewController.swift in Sources */,
 				55F71EF323ECB3B7006D3EC0 /* Location.swift in Sources */,
+				55F071AC241AAAF500FADFBB /* AlertCell.swift in Sources */,
 				55808CFE2404583800CB8FFB /* RatingViewController.swift in Sources */,
 				5532048E23ED107900EC869B /* Profile.swift in Sources */,
 				5550A0BE23E33AF400AD4034 /* TaskCell.swift in Sources */,
