@@ -73,6 +73,14 @@ class TaskBeginViewController: UIViewController, CLLocationManagerDelegate {
                 }
             })
             
+            // Update weather information
+            getWeather(lon: self.coords!.lng, lat: self.coords!.lat, completion: { (temp, err) in
+                if let err = err {
+                    print("Error getting weather data: \(err)")
+                } else {
+                    self.db.updateWeather(temp: temp!)
+                }
+            })
         }
     }
     

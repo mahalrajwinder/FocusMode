@@ -98,6 +98,26 @@ class Database {
         })
     }
     
+    func updateWeather(temp: Double) {
+        let uid = UserDefaults.standard.string(forKey: "uid")!
+        let docRef = self.db.collection("model").document(uid)
+        
+        docRef.getDocument(completion: { (doc, err) in
+            if let doc = doc, doc.exists {
+                var temps = doc.get("tempRange") as! [String: Double]
+                temps["count"]! += 1
+                temps["temperatures"]! += temp
+                docRef.setData([
+                    "tempRange": temps
+                ], merge: true) { err in
+                    if let err = err {
+                        print("Error updating weather: \(err)")
+                    }
+                }
+            }
+        })
+    }
+    
     // MARK: - Place
     
     func addPlace(place: Place) {

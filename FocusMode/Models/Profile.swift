@@ -88,6 +88,6 @@ struct UserModel {
 //    let mostMissedDeadlinesTaskSubject: String
 //    let mostMissedDeadlinesTaskCategory: String
     let activity: Int // number of minutes study. Reset to 0 at midnight.
-    let tempRange: [String: Int] // ["temperatures": Double, "count": # of readings] Then use this to find average temp. Reset temperatures to average and Count to 1 after each month.
+    let tempRange: [String: Double] // ["temperatures": Double, "count": # of readings] Then use this to find average temp. Reset temperatures to average and Count to 1 after each month.
 //    let avgSteps: Int
 }
