@@ -6,6 +6,9 @@ One of the main goals of a college education is learning how to solve problems a
 
 Both procrastination and distractions during study time could attribute to their overall stress, thereby resulting in poor understanding of concepts and a higher risk of failing the class. To help students overcome these common yet challenging problems, we are developing an iOS app named **FocusMode**. Our app will track their [college students] pending tasks as well as their study habits to help them effectively manage their time. The goal of the app is to recommend its users for a particular place and time to work on a particular task to ensure that they finish all their assigned tasks before the due date while creating a balance between their personal life and study time.
 
+## Application Architecture
+![architecture](architecture.jpg)
+
 ## Building the Personal Model
 
 Foremost to describing the procedure of building the user model, it is essential to clarify that two different types of user models are constructed. The first is a static user model build using the Explicit Modeling Approach, meaning by asking the user directly. The second is a dynamic user model that is built using both Explicit and Implicit Modeling Approach and uses a learning algorithm to modify the model as the user interacts with the system.
